@@ -1,0 +1,116 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.neotys.xebialabs.xl</groupId>
+    <artifactId>NL-XL-Plugin</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <name>xlr-addon-for-NeoLoad</name>
+    <description>This is an XL Release plugin for NeoLoad.</description>
+
+    <!-- <packaging>neoload-plugin</packaging>-->
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-plugin-api</artifactId>
+            <version>2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.xebialabs.overthere</groupId>
+            <artifactId>overthere</artifactId>
+            <version>4.3.3</version>
+        </dependency>
+        <dependency>
+            <groupId>com.xebialabs.deployit</groupId>
+            <artifactId>udm-plugin-api</artifactId>
+            <version>2017.6.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.xebialabs.deployit/engine-api -->
+        <dependency>
+            <groupId>com.xebialabs.deployit</groupId>
+            <artifactId>engine-api</artifactId>
+            <version>2017.7.0</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.xebialabs.deployit/maven-deployit-plugin -->
+        <dependency>
+            <groupId>com.xebialabs.deployit</groupId>
+            <artifactId>maven-deployit-plugin</artifactId>
+            <version>4.5.4</version>
+        </dependency>
+        <dependency>
+            <groupId>com.neotys</groupId>
+            <artifactId>password-scrambler-portable</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>2.1</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <filters>
+                                <filter>
+                                    <artifact>*:*</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/*.SF</exclude>
+                                        <exclude>META-INF/*.DSA</exclude>
+                                        <exclude>META-INF/*.RSA</exclude>
+                                    </excludes>
+                                </filter>
+                            </filters>
+                            <artifactSet>
+                                <includes>
+                                    <include>com.neotys:password-scrambler-portable</include>
+                                </includes>
+                            </artifactSet>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+
+    </build>
+    <repositories>
+        <repository>
+            <id>xebialabs</id>
+            <url>https://dist.xebialabs.com/public/maven2</url>
+        </repository>
+        <repository>
+            <id>neotys-apis-releases</id>
+            <url>http://nexus/index.html#nexus-search;quick~password-scrambler-portable</url>
+        </repository>
+    </repositories>
+</project>

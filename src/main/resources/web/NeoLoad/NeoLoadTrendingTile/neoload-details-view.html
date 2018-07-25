@@ -1,0 +1,67 @@
+<html>
+<head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi?autoload=
+{'modules':[{'name':'visualization','version':'1.1','packages':
+['corechart','table']}]}"></script>
+
+
+</head>
+<body>
+<div id="curve_chart" ></div>
+<div id="perfdata"> </div>
+<script type="text/javascript">
+   window.addEventListener("xlrelease.load", function (){
+      google.charts.load('current', {'packages':['corechart','table']});
+
+      window.xlrelease.queryTileData(function (response) {
+          var json = response.data.data;
+          console.log(json);
+
+          var jsonData = JSON.parse(JSON.stringify(json));
+          var Graph = new Array();
+          var Table = new Array();
+
+
+          Graph[0] = ['Build', jsonData.type];
+
+          for (var i = 0; i < jsonData.data_graph.length; i++) {
+             var counter = jsonData.data_graph[i];
+             Graph[i + 1] = [ i+1, counter.kpi ];
+             Table[i] = [ counter.kpi ];
+
+         }
+
+          google.charts.setOnLoadCallback(drawTable(jsonData.type,Table));
+          google.charts.setOnLoadCallback(drawChart(Graph,jsonData.type));
+       });
+
+
+        function drawTable(type,array) {
+        var data = new google.visualization.DataTable();
+         data.addColumn('number', type);
+
+
+        data.addRows(array);
+
+        var table = new google.visualization.Table(document.getElementById('perfdata'));
+
+        table.draw(data, {showRowNumber: true, width: '70%', height: '80%'});
+      }
+       function drawChart(array,type) {
+         var data =  google.visualization.arrayToDataTable(array);
+         var options = {
+            title: 'Performance Trending Graph on ' + type,
+            width: 600,
+            height: 300,
+           curveType: 'function',
+           legend: { position: 'bottom' }
+         };
+
+         var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+         chart.draw(data, options);
+       }
+    });
+</script>
+</body>
+</html>

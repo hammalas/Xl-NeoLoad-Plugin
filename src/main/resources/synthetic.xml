@@ -1,0 +1,200 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+    Copyright 2017 XebiaLabs, Inc.
+    Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+    The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+-->
+<synthetic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns="http://www.xebialabs.com/deployit/synthetic"
+           xsi:schemaLocation="http://www.xebialabs.com/deployit/synthetic synthetic.xsd">
+    <type type="NeoLoad.Controller" extends="xlrelease.Configuration">
+        <property name="NL_Host" default="/opt/NeoLoad/bin/NeoLoadCmd" required="true" label="NeoLoad Host" description="Host where NeoLoad is installed" category="input" />
+        <property name="NL_Controller_Path" default="/opt/NeoLoad/" required="true" label="NeoLoad Installation path" description="Path to the NeoLoad installation" category="input" />
+        <property name="username" description="The username to connect to the NeoLoad Controller" category="input" label="Login" />
+        <property name="password" description="The password to connect to the NeoLoad Controller" category="input" password="true" label="password"/>
+        <property name="OS"  label="OS" required="true" default="Linux" description="Os the NL instance linux ( ssh ) windows, macos" kind="enum">
+        <enum-values>
+            <value>WINDOWS</value>
+            <value>WINDOWSRM</value>
+            <value>Linux</value>
+            <value>MacOs</value>
+        </enum-values>
+        </property>
+    </type>
+    <type type="NeoLoad.WEB" extends="xlrelease.Configuration">
+        <property name="NL_WEB_URL" default="https://neoload-api.saas.neotys.com" required="false" label="Neoload WEB API url" description="Url of the NeoLoad Web API Interface" category="input" />
+    </type>
+    <type type="NeoLoad.TeamServer" extends="xlrelease.Configuration">
+        <property name="TeamServerHost" category="input"  description="Url to connect to the Neotys Teamserver"/>
+        <property name="username" description="TeamServer username" category="input"/>
+        <property name="password" description="TeamServer hashed password" category="password"/>
+        <property name="licenceID" description="license id of your shared license" category="input"/>
+    </type>
+
+    <type type="NeoLoad.Cloud" extends="xlrelease.Configuration">
+        <property name="username" description="Neotys CloudPlatform username" category="input"/>
+        <property name="password" description="Neotys CloudPlatform password" category="password"/>
+    </type>
+
+    <type type="NeoLoad.Collaboration" extends="xlrelease.Configuration">
+        <property name="Url" category="input"  description="Url to the source control"/>
+        <property name="username" description="Collaboration username" category="input"/>
+        <property name="password" description="Collaboration hashed password" category="password"/>
+    </type>
+    <type type="NeoLoad.UpdateConstantVariables" extends="xlrelease.PythonScript" label="NeoLoad Update Constant Variable" description="Update Constant a NeoLoad variables">
+    <property name="iconLocation" default="neoload.png" hidden="true"/>
+    <property name="taskColor" hidden="true" default="##6CBF09" />
+        <property name="ConstantVariableName"   required="true" label="Name of the Neolaod Variable"  category="input"/>
+        <property name="ConstantVariableValue"  required="true" label="Value of the NeoLoad Variable"  category="input"/>
+        <property name="NeoLoadVariable" hidden="true" default="-1" category="output" />
+    </type>
+    <type type="NeoLoad.LaunchTest" extends="xlrelease.PythonScript" label="NeoLoad Test" description="Execute a NeoLoad test">
+        <property name="iconLocation" default="neoload.png" hidden="true"/>
+        <property name="taskColor" hidden="true" default="##6CBF09" />
+        <property name="NeoLoadPath"  kind="ci" required="true" label="NeoLoad" referenced-type="NeoLoad.Controller" category="input"/>
+        <property name="NeoLoadWebAPI" kind="ci" required="false" label="Neolaod Web API" referenced-type="NeoLoad.WEB" category="input"/>
+        <property name="NeoloadWebAPItoken" category="input" required="false" label="NeoLoad Web token" description="NeoLaod WEB API Token"/>
+        <property name="NeoloadCloudPlatform" kind="ci" category="input" required="false" referenced-type="NeoLoad.Cloud" />
+        <property name="NeoLoadTeamServer"  kind="ci" required="false" category="input" label="NTS" referenced-type="NeoLoad.TeamServer" />
+        <property name="NumberOfUser"   required="false" category="input" label="NBSharedVu" description="Number of virtual user" />
+        <property name="NumberOfhour"   required="false" category="input" label="NBhour" description="Number of hour of the shared license" />
+        <property name="NeoLoadCollaboration"  kind="ci" required="false" category="input" label="Collaboration" referenced-type="NeoLoad.Collaboration" />
+        <property name="LocalNeoLoadProject" category="input" required="false" description="path to the local NeoLoad project" label="NeoLoad project Name"/>
+        <property name="CollaborationProjectPath" category="input" required="false"/>
+        <property name="CollabProjectName" category="input" required="false" label="Collaboration Project Name" description="Name of the shared project"/>
+        <property name="NeoloadScenario" category="input" required="true" label="Neoload scenario" description="Name of the NeoLoad test to launch"/>
+        <property name="NeoLoadTestDescription" category="input" required="false" label="Test Description" description="Description of the test"/>
+      </type>
+    <type type="NeoLoad.LaunchNeoLoadCloudSession" extends="xlrelease.PythonScript" label="NeoLoad Cloud Session" description="Launch NeoLoad Cloud Session">
+        <property name="iconLocation" default="neoload.png" hidden="true"/>
+        <property name="taskColor" hidden="true" default="##6CBF09" />
+        <property name="NeoLoadCloudWorkGroup"  required="true"  label="Neotys Cloud WorkGroup" category="input"/>
+        <property name="NeoLoadCloudDuration"  required="true"  label="Neotys Cloud Session Duration" category="input"/>
+        <property name="NeoLoadCloudType"  label="Type Of Cloud Instances" category="input" required="true"  description="Type of Cloud Instances" default="MEDIUM" kind="enum">
+            <enum-values>
+                <value>MEDIUM</value>
+                <value>LARGE</value>
+            </enum-values>
+        </property>
+        <property name="ap_northeast_1" label="Asia-Pacific Japan (Tokyo 1)" description="Number of AWS Asia-Pacific Japan (Tokyo 1)" required="false" category="input"/>
+        <property name="ap_northeast_4" label="Asia-Pacific South Korea (Seoul 1)" description="Number of AWS Asia-Pacific South Korea (Seoul 1)" required="false" category="input"/>
+        <property name="ap_south_2" label="Asia-Pacific India (Mumbai 1)" description="Number of AWS Asia-Pacific India (Mumbai 1)" required="false" category="input"/>
+        <property name="ap_southeast_1" label="Asia-Pacific Singapore 1" description="Number of AWS Asia-Pacific Singapore 1" required="false" category="input"/>
+        <property name="ap_southeast_3" label="Asia-Pacific Australia (Sydney 1)" description="Number of AWS Asia-Pacific Australia (Sydney 1)" required="false" category="input"/>
+        <property name="eu_center_2" label="Europe Germany (Frankfurt 1)" description="Number of AWS Europe Germany (Frankfurt 1)" required="false" category="input"/>
+        <property name="eu_west_1" label="Europe Ireland (Dublin 1)" description="Number of AWS Europe Ireland (Dublin 1)" required="false" category="input"/>
+        <property name="eu_west_12" label="Europe United Kingdom (London 3)" description="Number of AWS Europe United Kingdom (London 3)" required="false" category="input"/>
+        <property name="na_northeast_5" label="North-America Canada (Montreal 3)" description="Number of AWS North-America Canada (Montreal 3)" required="false" category="input"/>
+        <property name="sa_east_1" label="South-America Brazil (Sao Paulo 1)" description="Number of AWS South-America Brazil (Sao Paulo 1)" required="false" category="input"/>
+        <property name="us_east_1" label="USA East - Virginia (Ashburn 1)" description="Number of AWS USA East - Virginia (Ashburn 1)" required="false" category="input"/>
+        <property name="us_east_8" label="USA East - Ohio (Columbus)" description="Number of AWS USA East - Ohio (Columbus)" required="false" category="input"/>
+        <property name="us_west_1" label="USA West - California (San Jose 1)" description="Number of AWS USA West - California (San Jose 1)" required="false" category="input"/>
+        <property name="us_west_2" label="USA West - Oregon (Portland)" description="Number of AWS USA West - Oregon (Portland)" required="false" category="input"/>
+        <property name="us_northcentral_1" label="USA Central - Illinois (Chicago 1)" description="Number of Rackspace USA Central - Illinois (Chicago 1)" required="false" category="input"/>
+        <property name="us_southcentral_1" label="USA Central - Texas (Dallas 1)" description="Number of Rackspace USA Central - Texas (Dallas 1)" required="false" category="input"/>
+        <property name="us_east_5" label="USA East - Virginia (Reston)" description="Number of Rackspace USA East - Virginia (Reston)" required="false" category="input"/>
+        <property name="ap_east_2" label="Asia-Pacific China (Hong Kong 2)" description="Number of Rackspace Asia-Pacific China (Hong Kong 2)" required="false" category="input"/>
+        <property name="ap_southeast_4" label="Asia-Pacific Australia (Sydney 2)" description="Number of Rackspace Asia-Pacific Australia (Sydney 2)" required="false" category="input"/>
+        <property name="eu_west_2" label="Europe United Kingdom (London 1)" description="Number of Rackspace Europe United Kingdom (London 1)" required="false" category="input"/>
+
+        <property name="eu_center_1" label="Europe Switzerland (Zurich)" description="Number of CloudSigma Europe Switzerland (Zurich)" required="false" category="input"/>
+        <property name="ap_east_1" label="Asia-Pacific China (Hong Kong 1)" description="Number of Azure Asia-Pacific China (Hong Kong 1)" required="false" category="input"/>
+
+        <property name="ap_northeast_2" label="Asia-Pacific Japan (Saitama)" description="Number of Azure Asia-Pacific Japan (Saitama)" required="false" category="input"/>
+        <property name="ap_northeast_3" label="Asia-Pacific Japan (Osaka)" description="Number of Azure Asia-Pacific Japan (Osaka)" required="false" category="input"/>
+        <property name="ap_northeast_5" label="Asia-Pacific South Korea (Seoul 2)" description="Number of Azure Asia-Pacific South Korea (Seoul 2)" required="false" category="input"/>
+        <property name="ap_northeast_6" label="Asia-Pacific South Korea (Busan)" description="Number of Azure Asia-Pacific South Korea (Busan)" required="false" category="input"/>
+        <property name="ap_south_3" label="Asia-Pacific India (Pune)" description="Number of Azure Asia-Pacific India (Pune)" required="false" category="input"/>
+        <property name="ap_south_4" label="Asia-Pacific India (Chennai 2)" description="Number of Azure Asia-Pacific India (Chennai 2)" required="false" category="input"/>
+        <property name="ap_southeast_2" label="Asia-Pacific Singapore 2" description="Number of Azure Asia-Pacific Singapore 2" required="false" category="input"/>
+        <property name="ap_southeast_6" label="Asia-Pacific Australia (Melbourne 2)" description="Number of Azure Asia-Pacific Australia (Melbourne 2)" required="false" category="input"/>
+        <property name="ap_southeast_7" label="Asia-Pacific Australia (Sydney 3)" description="Number of Azure Asia-Pacific Australia (Sydney 3)" required="false" category="input"/>
+        <property name="eu_west_5" label="Europe Netherlands (Amsterdam 2)" description="Number of Azure Europe Netherlands (Amsterdam 2)" required="false" category="input"/>
+        <property name="eu_west_6" label="Europe Ireland (Dublin 2)" description="Number of Azure Europe Ireland (Dublin 2)" required="false" category="input"/>
+        <property name="eu_west_13" label="Europe United Kingdom (Cardiff)" description="Number of Azure Europe United Kingdom (Cardiff)" required="false" category="input"/>
+        <property name="eu_west_14" label="Europe United Kingdom (London 4)" description="Number of Azure Europe United Kingdom (London 4)" required="false" category="input"/>
+        <property name="na_northeast_6" label="North-America Canada (Toronto 2)" description="Number of Azure North-America Canada (Toronto 2)" required="false" category="input"/>
+        <property name="na_northeast_7" label="North-America Canada (Québec City)" description="Number of Azure North-America Canada (Québec City)" required="false" category="input"/>
+        <property name="us_east_4" label="USA East - Virginia (Ashburn 2)" description="Number of Azure USA East - Virginia (Ashburn 2)" required="false" category="input"/>
+        <property name="us_northcentral_2" label="USA Central - Illinois (Chicago 2)" description="Number of Azure USA Central - Illinois (Chicago 2)" required="false" category="input"/>
+        <property name="us_northcentral_3" label="USA Central - Iowa (West Des Moines)" description="Number of Azure USA Central - Iowa (West Des Moines)" required="false" category="input"/>
+        <property name="us_southcentral_2" label="USA Central - Texas (San Antonio)" description="Number of Azure USA Central - Texas (San Antonio)" required="false" category="input"/>
+        <property name="us_west_7" label="USA West - California (San Francisco)" description="Number of Azure USA West - California (San Francisco)" required="false" category="input"/>
+        <property name="us_west_8" label="USA West - California (Los Angeles)" description="Number of Azure USA West - California (Los Angeles)" required="false" category="input"/>
+        <property name="us_west_9" label="USA West - Arizona (Phoenix)" description="Number of Azure USA West - Arizona (Phoenix)" required="false" category="input"/>
+
+        <property name="ap_east_3" label="Asia-Pacific Taiwan (Changhua County)" description="Number of Google Cloud Asia-Pacific Taiwan (Changhua County)" required="false" category="input"/>
+
+        <property name="ap_northeast_7" label="Asia-Pacific Japan (Tokyo 2)" description="Number of Google Cloud Asia-Pacific Japan (Tokyo 2)" required="false" category="input"/>
+        <property name="ap_southeast_8" label="Asia-Pacific Singapore 3" description="Number of Google Cloud Asia-Pacific Singapore 3" required="false" category="input"/>
+        <property name="eu_west_7" label="Europe Belgium (St. Ghislain)" description="Number of Google Cloud Europe Belgium (St. Ghislain)" required="false" category="input"/>
+        <property name="us_east_3" label="USA East - South Carolina (Berkeley County)" description="Number of Google Cloud USA East - South Carolina (Berkeley County)" required="false" category="input"/>
+        <property name="us_east_9" label="USA East - Virginia (Ashburn 3)" description="Number of Google Cloud USA East - Virginia (Ashburn 3)" required="false" category="input"/>
+        <property name="us_northcentral_4" label="USA Central - Iowa (Council Bluffs)" description="Number of Google Cloud USA Central - Iowa (Council Bluffs)" required="false" category="input"/>
+        <property name="us_west_6" label="USA West - Oregon (The Dalles)" description="Number of Google Cloud USA West - Oregon (The Dalles)" required="false" category="input"/>
+
+        <property name="eu_west_8" label="Europe France (Strasbourg)" description="Number of OVH Europe France (Strasbourg)" required="false" category="input"/>
+        <property name="eu_west_11" label="Europe France (Gravelines)" description="Number of OVH Europe France (Gravelines)" required="false" category="input"/>
+        <property name="na_northeast_1" label="North-America Canada (Montreal 1)" description="Number of OVH North-America Canada (Montreal 1)" required="false" category="input"/>
+
+        <property name="eu_west_3" label="Europe United Kingdom (London 2)" description="Number of Softlayer Europe United Kingdom (London 2)" required="false" category="input"/>
+        <property name="eu_west_9" label="Europe France (Paris 1)" description="Number of Softlayer Europe France (Paris 1)" required="false" category="input"/>
+        <property name="eu_west_10" label="Europe Netherlands (Amsterdam 3)" description="Number of Softlayer Europe Netherlands (Amsterdam 3)" required="false" category="input"/>
+        <property name="eu_center_3" label="Europe Germany (Frankfurt 2)" description="Number of Softlayer Europe Germany (Frankfurt 2)" required="false" category="input"/>
+        <property name="eu_north_1" label="Europe Norway (Oslo)" description="Number of Softlayer Europe Norway (Oslo)" required="false" category="input"/>
+        <property name="eu_south_1" label="Europe Italy (Milan)" description="Number of Softlayer Europe Italy (Milan)" required="false" category="input"/>
+        <property name="na_northeast_2" label="North-America Canada (Toronto 1)" description="Number of Softlayer North-America Canada (Toronto 1)" required="false" category="input"/>
+        <property name="na_northeast_3" label="North-America Mexico (Mexico City)" description="Number of Softlayer North-America Mexico (Mexico City)" required="false" category="input"/>
+        <property name="na_northeast_4" label="North-America Canada (Montreal 2)" description="Number of Softlayer North-America Canada (Montreal 2)" required="false" category="input"/>
+        <property name="us_west_3" label="USA West - Washington (Seattle)" description="Number of Softlayer USA West - Washington (Seattle)" required="false" category="input"/>
+        <property name="us_west_5" label="USA West - California (San Jose 2)" description="Number of Softlayer USA West - California (San Jose 2)" required="false" category="input"/>
+        <property name="us_southcentral_3" label="USA Central - Texas (Houston)" description="Number of Softlayer USA Central - Texas (Houston)" required="false" category="input"/>
+        <property name="us_southcentral_4" label="USA Central - Texas (Dallas 2)" description="Number of Softlayer USA Central - Texas (Dallas 2)" required="false" category="input"/>
+        <property name="us_east_2" label="USA East - Washington, D.C." description="Number of Softlayer USA East - Washington, D.C." required="false" category="input"/>
+        <property name="ap_southeast_5" label="Asia-Pacific Australia (Melbourne 1)" description="Number of Softlayer Asia-Pacific Australia (Melbourne 1)" required="false" category="input"/>
+        <property name="ap_south_1" label="Asia-Pacific India (Chennai 1)" description="Number of Softlayer Asia-Pacific India (Chennai 1)" required="false" category="input"/>
+
+        <property name="eu_west_4" label="Europe France (Paris 2)" description="Number of Outscale Europe France (Paris 2)" required="false" category="input"/>
+        <property name="us_east_7" label="USA East - New Jersey" description="Number of Outscale USA East - New Jersey" required="false" category="input"/>
+
+
+        <property name="NeoLoadCloudYML"  hidden="true"  default="-1" label="YML file" category="output"/>
+
+    </type>
+
+
+    <type type="NeoLoad.NeoLoadTrendingTile" label="NeoLoad Trending tile" extends="xlrelease.Tile">
+        <property name="uri" hidden="true" default="NeoLoad/NeoLoadTrendingTile/neoloadtrending-summary-view.html"/>
+        <property name="detailsUri" hidden="true" default="NeoLoad/NeoLoadTrendingTile/neoload-details-view.html"/>
+        <property name="title" description="Tile title" default="NeoLoad Trending Graph"/>
+       <!-- <property name="embedded" kind="boolean" hidden="true" default="true" required="false"/>-->
+        <property category="input" name="NeoLoadTaskTitle"  label="Name of the NeoLoad tasks" description="Name of the Neoload xl release tasks" required="true"/>
+        <property name="TrendingData" category="input" label="Type of Data" required="true" default="Response Time" description="Metrics that you would like to Trend" kind="enum">
+            <enum-values>
+                <value>Hit/s</value>
+                <value>Response Time</value>
+                <value>Errors</value>
+            </enum-values>
+        </property>
+        <property name="cacheEnabled" kind="boolean" hidden="true" default="false" description="True if tile data should be cached."/>
+        <property name="userSpecificCache" kind="boolean" hidden="true" default="false" description="True if tile data should be cached per user."/>
+        <property name="expirationTime" kind="integer" hidden="true" default="3" description="Expiration time for a tile cache (in seconds)."/>
+        <property name="maxCacheEntries" kind="integer" hidden="true" default="1" description="Maximum cache entries."/>
+  </type>
+    <type type="NeoLoad.NeoLoadCustomTrendingTile" label="NeoLoad Custom Trending tile" extends="xlrelease.Tile">
+        <property name="uri" hidden="true" default="NeoLoad/NeoLoadTrendingTile/neoloadcustomtrending-summary-view.html"/>
+        <property name="detailsUri" hidden="true" default="NeoLoad/NeoLoadTrendingTile/neoloadcustom-details-view.html"/>
+        <property name="title" description="Tile title" default="NeoLoad custom Trending Graph"/>
+        <!-- <property name="embedded" kind="boolean" hidden="true" default="true" required="false"/>-->
+        <property category="input" name="NeoLoadTaskTitle"  label="Name of the NeoLoad tasks" description="Name of the Neoload xl release tasks" required="true"/>
+        <property category="input" name="NeoLoadKpiName"  label="Name of the metrics to trend" description="Name of the NeoLoad Kpi to trend" required="true"/>
+
+        <property name="reportXpathQuery" category="input" label="Type of Data" required="true" description="Xpath Query to extract the kpi" />
+
+        <property name="cacheEnabled" kind="boolean" hidden="true" default="false" description="True if tile data should be cached."/>
+        <property name="userSpecificCache" kind="boolean" hidden="true" default="false" description="True if tile data should be cached per user."/>
+        <property name="expirationTime" kind="integer" hidden="true" default="3" description="Expiration time for a tile cache (in seconds)."/>
+        <property name="maxCacheEntries" kind="integer" hidden="true" default="1" description="Maximum cache entries."/>
+    </type>
+</synthetic>
