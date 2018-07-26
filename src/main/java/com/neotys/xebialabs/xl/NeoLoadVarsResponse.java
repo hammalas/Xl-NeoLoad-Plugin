@@ -8,10 +8,10 @@ public class NeoLoadVarsResponse extends CloudResponse {
     public NeoLoadVarsResponse(String content, int code) {
         super(content, code);
     }
-    public void appendContent(String Content)
+    public void appendContent(String content)
 
     {
-        if(!this.ymlContent.contains(Content))
-             this.ymlContent +=","+Content;
+        if(!this.ymlContent.contains(content))
+             this.ymlContent +=","+content;
     }
 }

@@ -23,7 +23,7 @@ public  class  NeoLoadFileUtil {
     static final String RESPONSE="response";
     static final String CUSTOM="custom";
 
-    public static String GetCustomStat(String Xpath, byte[] bytes)
+    public static String getCustomStat(String xpath, byte[] bytes)
     {
         String result = null;
 
@@ -34,7 +34,7 @@ public  class  NeoLoadFileUtil {
             DocumentBuilder builder = factory.newDocumentBuilder();
             Document doc=builder.parse(input);
 
-            result=GetCustomData(doc,Xpath);
+            result=GetCustomData(doc,xpath);
 
         }
         catch(Exception e)
@@ -45,7 +45,7 @@ public  class  NeoLoadFileUtil {
             return result;
         }
     }
-    public static String GetStat(String Type,byte[] bytes) throws IOException, SAXException, ParserConfigurationException, XPathExpressionException {
+    public static String GetStat(String type, byte[] bytes) throws IOException, SAXException, ParserConfigurationException, XPathExpressionException {
         String result = null;
 
         InputStream input= new ByteArrayInputStream(bytes);
@@ -53,7 +53,7 @@ public  class  NeoLoadFileUtil {
         DocumentBuilder builder = factory.newDocumentBuilder();
         Document doc=builder.parse(input);
 
-        switch(Type)
+        switch(type)
         {
             case HITS:
                 result=GetData(doc,"avg_hits/s");

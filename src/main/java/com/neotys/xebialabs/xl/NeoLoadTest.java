@@ -59,7 +59,7 @@ public class NeoLoadTest {
 	private static final String SCRIPT_NAME = "NeoLoad-Test";
 	private static final String UNIX_SCP_HOME = "/home/";
 	private static final String MAC_SCP_HOME = "/Users/";
-	private final static String SPACE = " ";
+	private static final String SPACE = " ";
 	private String windowsUserHomeDirectory;
 	private ConnectionOptions options;
 	private OperatingSystem OS;
@@ -88,13 +88,13 @@ public class NeoLoadTest {
 	private String NLCloudPassword;
 	private boolean NLIsCloud;
 	private boolean NlISNLWeb;
-	private String NLTestDescription;
-	private String ReleaseName;
-	private String ReleaseId;
-	private String CloudYML = null;
-	private String Variables = null;
-	private boolean IsVariableUsed = false;
-	private boolean IsCloudUsed = false;
+	private String nlTestDescription;
+	private String releaseName;
+	private String releaseId;
+	private String cloudYml = null;
+	private String variables = null;
+	private boolean isVariableUsed = false;
+	private boolean isCloudUsed = false;
 	private OverthereConnection overthereConnection;
 
 	public NeoLoadTest(String host, String username, String password, String path, String os
@@ -108,7 +108,7 @@ public class NeoLoadTest {
 		this.OS = valueOf(os.toLowerCase());
 		this.NLScenarioName = neoloadScenario;
 		this.NLProjectPath = localNeoLoadProject;
-		this.NLTestDescription = neoLoadTestDescription;
+		this.nlTestDescription = neoLoadTestDescription;
 		this.NLWEBAPIToken = neoloadWebAPItoken;
 		this.NLCollabProjectPath = collaborationProjectPath;
 		this.NLCollabProjectName = nlcollabprojectname;
@@ -139,7 +139,7 @@ public class NeoLoadTest {
 		//-----settings on the test execution--------------
 		this.NLScenarioName = remoteScript.getProperty("NeoloadScenario");
 		this.NLProjectPath = remoteScript.getProperty("LocalNeoLoadProject");
-		this.NLTestDescription = remoteScript.getProperty("NeoLoadTestDescription");
+		this.nlTestDescription = remoteScript.getProperty("NeoLoadTestDescription");
 		//--------------------------------------------------
 
 		//-----NL Web settings-------------------------------------
@@ -178,21 +178,21 @@ public class NeoLoadTest {
 	}
 
 	public void setReleaseInformation(String id, String name) {
-		this.ReleaseId = id;
-		this.ReleaseName = name;
+		this.releaseId = id;
+		this.releaseName = name;
 	}
 
 	public void AddCloudYML(String yml) {
 		if (yml != null) {
-			this.CloudYML = yml;
-			IsCloudUsed = true;
+			this.cloudYml = yml;
+			isCloudUsed = true;
 		}
 	}
 
 	public void setVarialbe(String variable) {
 		if (variable != null) {
-			Variables = variable;
-			IsVariableUsed = true;
+			variables = variable;
+			isVariableUsed = true;
 		}
 	}
 
@@ -290,22 +290,22 @@ public class NeoLoadTest {
 			cmd.addRaw("-NCPLogin \"" + this.NLCloudUsername + ":" + PasswordEncoder.encode(this.NLCloudPassword) + "\"");
 		}
 
-		if (IsVariableUsed) {
-			cmd.addRaw("-variables \"" + this.Variables + "\"");
+		if (isVariableUsed) {
+			cmd.addRaw("-variables \"" + this.variables + "\"");
 		}
 
 		final String fileTempFolder = generateFileTempFolder();
-		if (IsCloudUsed) {
+		if (isCloudUsed) {
 			cmd.addRaw("-loadGenerators '" + Paths.get(fileTempFolder, "tmp.yaml'").toString());
 		}
 
 		cmd.addRaw("-SLAJUnitMapping 'pass'");
 		cmd.addRaw("-SLAJUnitResults '" + Paths.get(fileTempFolder, "junit.xml'").toString());
 
-		if (this.ReleaseName != null) {
-			cmd.addRaw("-description '" + this.NLTestDescription + "_" + this.ReleaseName + "_" + this.ReleaseId + "'");
+		if (this.releaseName != null) {
+			cmd.addRaw("-description '" + this.nlTestDescription + "_" + this.releaseName + "_" + this.releaseId + "'");
 		} else {
-			cmd.addRaw("-description '" + this.NLTestDescription + "'");
+			cmd.addRaw("-description '" + this.nlTestDescription + "'");
 		}
 
 		cmd.addRaw("-report '" + Paths.get(fileTempFolder,"report.xml").toString() + "," + Paths.get(fileTempFolder, "report.pdf").toString() + "'");
@@ -408,9 +408,9 @@ public class NeoLoadTest {
 
 				System.out.println("Execute script: " + script);
 
-				if (CloudYML != null) {
+				if (cloudYml != null) {
 					comment.append("Setting Cloud Session to the controller.....\n");
-					log = createRemoteFile(overthereConnection, CloudYML);
+					log = createRemoteFile(overthereConnection, cloudYml);
 				}
 
 				comment.append("Launching test.....\n").append(script);
@@ -458,7 +458,7 @@ public class NeoLoadTest {
 				}
 
 
-				if (IsCloudUsed) {
+				if (isCloudUsed) {
 					junit = overthereConnection.getFile(Paths.get(tempFolder, "tmp.yaml").toString());
 					if (junit.exists()) {
 						junit.delete();

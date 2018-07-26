@@ -1,4 +1,3 @@
-import sys,json
 from com.xebialabs.xlrelease.domain import Task
 from com.xebialabs.deployit.plugin.api.reflect import Type
 from com.neotys.xebialabs.xl import NeoLoadFileUtil
@@ -18,7 +17,7 @@ def GetNeoLoadData(title,releaseid,reportXpathQuery,NeoLoadKpiName):
                 for att in attachmens:
                     if att.fileUri=="jcr:report.xml":
                         file_byte= _releaseApi.getAttachment(att.id)
-                        hits=NeoLoadFileUtil.GetCustomStat(reportXpathQuery,file_byte)
+                        hits=NeoLoadFileUtil.getCustomStat(reportXpathQuery, file_byte)
                         result+="{\"kpi\":"+hits+"},"
 
 
