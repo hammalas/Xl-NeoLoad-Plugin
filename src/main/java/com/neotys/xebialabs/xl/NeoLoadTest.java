@@ -182,7 +182,7 @@ public class NeoLoadTest {
 		this.releaseName = name;
 	}
 
-	public void AddCloudYML(String yml) {
+	public void addCloudYML(String yml) {
 		if (yml != null) {
 			this.cloudYml = yml;
 			isCloudUsed = true;
@@ -262,10 +262,10 @@ public class NeoLoadTest {
 		cmd.addRaw("\"" + cmdLine + "\"");
 
 		if (NLIsCollab) {
-			cmd.addRaw("-checkoutProject " + "\"" + this.NLCollabProjectName + "\"");
 			cmd.addRaw("-Collab " + "\"" + this.NLCollabUrl + this.NLCollabProjectPath + "\"");
-			cmd.addRaw("-CollabLogin " + "\"" + this.NLCollabUsername + ":" + PasswordEncoder.encode(this.NLCollabPassword) + "\"");
-		}
+            cmd.addRaw("-CollabLogin " + "\"" + this.NLCollabUsername + ":" + PasswordEncoder.encode(this.NLCollabPassword) + "\"");
+            cmd.addRaw("-checkoutProject " + "\"" + this.NLCollabProjectName + "\"");
+        }
 
 		if (NLIsNTS) {
 			cmd.addRaw("-NTS " + "\"" + this.NTSUrl + "\"");
@@ -376,16 +376,13 @@ public class NeoLoadTest {
 	private StringBuilder createRemoteFile(OverthereConnection connection, String content) throws IOException {
 		StringBuilder result = new StringBuilder();
 
-		OverthereFile motd = connection.getFile(generateFileTempFolder() + "tmp.yaml");
-		OutputStream w = motd.getOutputStream();
-		try {
-			result.append(content);
-			w.write(content.getBytes());
-		} finally {
-			w.close();
-			return result;
-		}
-	}
+		OverthereFile overthereFile = connection.getFile(generateFileTempFolder() + "tmp.yaml");
+        try (OutputStream w = overthereFile.getOutputStream()) {
+            result.append(content);
+            w.write(content.getBytes());
+        }
+        return result;
+    }
 
 	public CmdResponse execute() {
 		int rc;
@@ -424,7 +421,7 @@ public class NeoLoadTest {
 				junit = overthereConnection.getFile(Paths.get(tempFolder, "report.dtd").toString());
 				copyFile(junit);
 
-				response.setReportdtdbytes(getFilebyteArray(junit));
+				response.setReportDTDBytes(getFilebyteArray(junit));
 				junit = overthereConnection.getFile(Paths.get(tempFolder, "report.xml").toString());
 
 				if (log != null) {
@@ -432,8 +429,8 @@ public class NeoLoadTest {
 				}
 
 				if (junit.exists()) {
-					log = getdata(junit.getInputStream(), response);
-					response.setReportXMLbytes(getFilebyteArray(junit));
+					log = getData(junit.getInputStream(), response);
+					response.setReportXMLBytes(getFilebyteArray(junit));
 					junit.delete();
 
 					if (log != null) {
@@ -443,14 +440,14 @@ public class NeoLoadTest {
 
 				junit = overthereConnection.getFile(Paths.get(tempFolder, "report.pdf").toString());
 				if (junit.exists()) {
-					response.setPDFbytes(getFilebyteArray(junit));
+					response.setPDFBytes(getFilebyteArray(junit));
 					junit.delete();
 				}
 
 				junit = overthereConnection.getFile(Paths.get(tempFolder, "junit.xml").toString());
 				if (junit.exists()) {
 					getJunitData(junit.getInputStream(), response);
-					response.setJunitxmlbytes(getFilebyteArray(junit));
+					response.setJunitXMLBytes(getFilebyteArray(junit));
 					response.rc = 1;
 					junit.delete();
 				} else {
@@ -474,7 +471,7 @@ public class NeoLoadTest {
 			stderr.handleLine(stacktrace.toString());
 			response.addToErr(stacktrace.toString());
 		} finally {
-			response.SetCommenrt(comment);
+			response.setComment(comment);
 			if (overthereConnection != null) {
 				overthereConnection.close();
 			}
@@ -482,7 +479,7 @@ public class NeoLoadTest {
 		}
 	}
 
-	private StringBuilder getdata(InputStream input, CmdResponse res) {
+	private StringBuilder getData(InputStream input, CmdResponse res) {
 		StringBuilder output = new StringBuilder();
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		String hit;
@@ -496,7 +493,7 @@ public class NeoLoadTest {
 			responseTime = retrieveData(doc, "avg_reqresponsetime");
 			error = retrieveData(doc, "total_errors");
 
-			res.addstat(responseTime, error, hit);
+			res.addStat(responseTime, error, hit);
 		} catch (Exception ex) {
 			output.append(ex.getMessage());
 		} finally {
@@ -577,14 +574,14 @@ public class NeoLoadTest {
 		public int rc;
 		public String stdout;
 		public String stderr;
-		public String responsetime;
+		public String responseTime;
 		public String error;
 		public String hits;
 
-		public byte[] ReportXMLbytes;
-		public byte[] Reportdtdbytes;
-		public byte[] junitxmlbytes;
-		public byte[] pdfbytes;
+		public byte[] reportXMLBytes;
+		public byte[] reportDTDBytes;
+		public byte[] junitXMLBytes;
+		public byte[] reportPDFBytes;
 		public String comment = null;
 
 		public CmdResponse(int rc, String stdout, String stderr) {
@@ -599,12 +596,12 @@ public class NeoLoadTest {
 			this.stderr = "";
 		}
 
-		private void SetCommenrt(StringBuilder com) {
+		private void setComment(StringBuilder com) {
 			this.comment = com.toString();
 		}
 
-		public void addstat(String responsetime, String error, String his) {
-			this.responsetime = responsetime;
+		public void addStat(String responseTime, String error, String his) {
+			this.responseTime = responseTime;
 			this.error = error;
 			this.hits = his;
 		}
@@ -627,20 +624,20 @@ public class NeoLoadTest {
 			this.rc = 1;
 		}
 
-		public void setReportXMLbytes(byte[] reportXMLbytes) {
-			ReportXMLbytes = reportXMLbytes;
+		public void setReportXMLBytes(byte[] reportXMLBytes) {
+			this.reportXMLBytes = reportXMLBytes;
 		}
 
-		public void setReportdtdbytes(byte[] reportdtdbytes) {
-			Reportdtdbytes = reportdtdbytes;
+		public void setReportDTDBytes(byte[] reportDTDBytes) {
+			this.reportDTDBytes = reportDTDBytes;
 		}
 
-		public void setPDFbytes(byte[] pdf) {
-			pdfbytes = pdf;
+		public void setPDFBytes(byte[] reportPDFBytes) {
+			this.reportPDFBytes = reportPDFBytes;
 		}
 
-		public void setJunitxmlbytes(byte[] junitxmlbytes) {
-			this.junitxmlbytes = junitxmlbytes;
+		public void setJunitXMLBytes(byte[] junitXMLBytes) {
+			this.junitXMLBytes = junitXMLBytes;
 		}
 	}
 

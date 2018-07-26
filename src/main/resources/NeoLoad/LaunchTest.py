@@ -25,23 +25,23 @@ session = NeoLoadTest(NeoLoadPath["NL_Host"], NeoLoadPath["username"], NeoLoadPa
                       NeoLoadPath["NL_Controller_Path"], NeoLoadPath["OS"], NeoloadScenario, LocalNeoLoadProject,
                       NeoLoadTestDescription, NeoloadWebAPItoken, CollabProjectName, CollaborationProjectPath,
                       NumberOfUser, NumberOfhour)
-session.SetReleaseInformation(releaseid, releasename)
+session.setReleaseInformation(releaseid, releasename)
 
 if NeoLoadWebAPI is not None:
-    session.SetWebAPI(NeoLoadWebAPI["NL_WEB_URL"])
+    session.setWebAPI(NeoLoadWebAPI["NL_WEB_URL"])
 
 if NeoLoadTeamServer is not None:
-    session.SetNTS(NeoLoadTeamServer["TeamServerHost"], NeoLoadTeamServer["username"], NeoLoadTeamServer["password"],
+    session.setNTS(NeoLoadTeamServer["TeamServerHost"], NeoLoadTeamServer["username"], NeoLoadTeamServer["password"],
                    NeoLoadTeamServer["licenceID"])
 
 if NeoLoadCollaboration is not None:
-    session.SetCollab(NeoLoadCollaboration["Url"], NeoLoadCollaboration["username"], NeoLoadCollaboration["password"])
+    session.setCollab(NeoLoadCollaboration["Url"], NeoLoadCollaboration["username"], NeoLoadCollaboration["password"])
 
 if NeoloadCloudPlatform is not None:
-    session.SetNLCloud(NeoloadCloudPlatform["username"], NeoloadCloudPlatform["password"])
+    session.setNLCloud(NeoloadCloudPlatform["username"], NeoloadCloudPlatform["password"])
 
 if NeoLoadCloudcreated:
-    session.AddCloudYML(NeoLoadCloudYML)
+    session.addCloudYML(NeoLoadCloudYML)
 
 if CreateVar:
     session.setVarialbe(NeoLoadVariable)
@@ -52,10 +52,10 @@ response = session.execute()
 output = response.stdout
 error = response.stderr
 
-reportxmlbyte = response.ReportXMLbytes
-reportdtdbyte = response.Reportdtdbytes
-junitbyte = response.junitxmlbytes
-pdfbytes = response.pdfbytes
+reportxmlbyte = response.reportXMLBytes
+reportdtdbyte = response.reportDTDBytes
+junitbyte = response.junitXMLBytes
+pdfbytes = response.reportPDFBytes
 com = response.comment
 taskid = getCurrentTask().id
 
