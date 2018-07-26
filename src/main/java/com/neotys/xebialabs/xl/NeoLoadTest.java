@@ -249,18 +249,17 @@ public class NeoLoadTest {
 		return windowsUserHomeDirectory;
 	}
 
-	private CmdLine generateCmdLine() throws GeneralSecurityException, UnsupportedEncodingException {
+	private CmdLine GenerateCmdLine() throws GeneralSecurityException, UnsupportedEncodingException {
 
-		String cmdLine;
 		CmdLine cmd = new CmdLine();
+		String CMDline = Paths.get(this.NLInstallationPath, "bin").toString();
 
-		cmdLine = this.NLInstallationPath + "/bin";
 		if (OS == WINDOWS || OS == WINDOWSRM) {
-			cmdLine += "/NeoLoadCmd.exe";
+			CMDline = Paths.get(CMDline, "NeoLoadCmd.exe").toString();
 		} else {
-			cmdLine += "/NeoLoadCmd";
+			CMDline = Paths.get(CMDline, "NeoLoadCmd").toString();
 		}
-		cmd.addRaw("\"" + cmdLine + "\"");
+		cmd.addRaw("\"" + CMDline + "\"");
 
 		if (NLIsCollab) {
 			cmd.addRaw("-checkoutProject " + "\"" + this.NLCollabProjectName + "\"");
@@ -295,21 +294,22 @@ public class NeoLoadTest {
 			cmd.addRaw("-variables \"" + this.Variables + "\"");
 		}
 
+		final String fileTempFolder = generateFileTempFolder();
 		if (IsCloudUsed) {
-			cmd.addRaw("-loadGenerators \"" + generateFileTempFolder() + "tmp.yaml\"");
+			cmd.addRaw("-loadGenerators '" + Paths.get(fileTempFolder, "tmp.yaml'").toString());
 		}
 
-		cmd.addRaw("-SLAJUnitMapping \"pass\"");
-		cmd.addRaw("-SLAJUnitResults \"" + generateFileTempFolder() + "junit.xml\"");
+		cmd.addRaw("-SLAJUnitMapping 'pass'");
+		cmd.addRaw("-SLAJUnitResults '" + Paths.get(fileTempFolder, "junit.xml'").toString());
 
 		if (this.ReleaseName != null) {
-			cmd.addRaw("-description \"" + this.NLTestDescription + "_" + this.ReleaseName + "_" + this.ReleaseId + "\"");
+			cmd.addRaw("-description '" + this.NLTestDescription + "_" + this.ReleaseName + "_" + this.ReleaseId + "'");
 		} else {
-			cmd.addRaw("-description \"" + this.NLTestDescription + "\"");
+			cmd.addRaw("-description '" + this.NLTestDescription + "'");
 		}
 
-		cmd.addRaw("-report \"" + generateFileTempFolder() + "report.xml," + generateFileTempFolder() + "report.pdf\"");
-		cmd.addRaw("-launch " + "\"" + this.NLScenarioName + "\"");
+		cmd.addRaw("-report '" + Paths.get(fileTempFolder,"report.xml").toString() + "," + Paths.get(fileTempFolder, "report.pdf").toString() + "'");
+		cmd.addRaw("-launch " + "'" + this.NLScenarioName + "'");
 		cmd.addRaw("-noGUI");
 
 		return cmd;
