@@ -251,14 +251,13 @@ public class NeoLoadTest {
 
     private CmdLine GenerateCmdLine() throws GeneralSecurityException, UnsupportedEncodingException {
 
-        String CMDline;
         CmdLine cmd = new CmdLine();
+        String CMDline = Paths.get(this.NLInstallationPath, "bin").toString();
 
-        CMDline = this.NLInstallationPath + "/bin";
         if (OS.equalsIgnoreCase(WINDOWS) || OS.equalsIgnoreCase(WINDOWSRM)) {
-            CMDline += "/NeoLoadCmd.exe";
+            CMDline = Paths.get(CMDline, "NeoLoadCmd.exe").toString();
         } else {
-            CMDline += "/NeoLoadCmd";
+            CMDline = Paths.get(CMDline, "NeoLoadCmd").toString();
         }
         cmd.addRaw("\"" + CMDline + "\"");
 
@@ -295,12 +294,13 @@ public class NeoLoadTest {
             cmd.addRaw("-variables '" + this.Variables + "'");
         }
 
+        final String fileTempFolder = GenerateFileTempFolder();
         if (IsCloudUsed) {
-            cmd.addRaw("-loadGenerators '" + GenerateFileTempFolder() + "tmp.yaml'");
+            cmd.addRaw("-loadGenerators '" + Paths.get(fileTempFolder, "tmp.yaml'").toString());
         }
 
         cmd.addRaw("-SLAJUnitMapping 'pass'");
-        cmd.addRaw("-SLAJUnitResults '" + GenerateFileTempFolder() + "junit.xml'");
+        cmd.addRaw("-SLAJUnitResults '" + Paths.get(fileTempFolder, "junit.xml'").toString());
 
         if (this.ReleaseName != null) {
             cmd.addRaw("-description '" + this.NLTestDescription + "_" + this.ReleaseName + "_" + this.ReleaseId + "'");
@@ -308,7 +308,7 @@ public class NeoLoadTest {
             cmd.addRaw("-description '" + this.NLTestDescription + "'");
         }
 
-        cmd.addRaw("-report '" + GenerateFileTempFolder() + "report.xml," + GenerateFileTempFolder() + "report.pdf'");
+        cmd.addRaw("-report '" + Paths.get(fileTempFolder,"report.xml").toString() + "," + Paths.get(fileTempFolder, "report.pdf").toString() + "'");
         cmd.addRaw("-launch " + "'" + this.NLScenarioName + "'");
         cmd.addRaw("-noGUI");
 
