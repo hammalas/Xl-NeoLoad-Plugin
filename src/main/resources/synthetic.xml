@@ -13,12 +13,12 @@
         <property name="NL_Controller_Path" default="/opt/NeoLoad/" required="true" label="NeoLoad Installation path" description="Path to the NeoLoad installation" category="input" />
         <property name="username" description="The username to connect to the NeoLoad Controller" category="input" label="Login" />
         <property name="password" description="The password to connect to the NeoLoad Controller" category="input" password="true" label="password"/>
-        <property name="OS"  label="OS" required="true" default="Linux" description="Os the NL instance linux ( ssh ) windows, macos" kind="enum">
+        <property name="OS" label="OS" required="true" default="Linux" description="OS the NL instance Linux (ssh), Windows, Mac OS" kind="enum">
         <enum-values>
-            <value>WINDOWS</value>
-            <value>WINDOWSRM</value>
+            <value>Windows - Telnet</value>
+            <value>Windows - WinRM</value>
             <value>Linux</value>
-            <value>MacOs</value>
+            <value>Mac OS</value>
         </enum-values>
         </property>
     </type>
@@ -26,10 +26,10 @@
         <property name="NL_WEB_URL" default="https://neoload-api.saas.neotys.com" required="false" label="Neoload WEB API url" description="Url of the NeoLoad Web API Interface" category="input" />
     </type>
     <type type="NeoLoad.TeamServer" extends="xlrelease.Configuration">
-        <property name="TeamServerHost" category="input"  description="Url to connect to the Neotys Teamserver"/>
-        <property name="username" description="TeamServer username" category="input"/>
-        <property name="password" description="TeamServer hashed password" category="password"/>
-        <property name="licenceID" description="license id of your shared license" category="input"/>
+        <property name="TeamServerHost" label="Neotys Team Server URL" description="Neotys Team Server URL" category="Configuration"/>
+        <property name="username" label="Neotys Team Server UserName" description="Neotys Team Server username" category="Configuration"/>
+        <property name="password" label="Neotys Team Server Password" description="Neotys Team Server password" password="true" category="Configuration"/>
+        <property name="licenceID" label="License Identifier" description="License identifier of your shared license" category="Configuration"/>
     </type>
 
     <type type="NeoLoad.Cloud" extends="xlrelease.Configuration">

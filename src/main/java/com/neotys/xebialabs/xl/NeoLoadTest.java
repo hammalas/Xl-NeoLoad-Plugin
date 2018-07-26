@@ -36,9 +36,8 @@ import java.io.UnsupportedEncodingException;
 import java.nio.file.Paths;
 import java.security.GeneralSecurityException;
 
-import static com.neotys.xebialabs.xl.NeoLoadTest.OperatingSystem.WINDOWS;
-import static com.neotys.xebialabs.xl.NeoLoadTest.OperatingSystem.WINDOWSRM;
-import static com.neotys.xebialabs.xl.NeoLoadTest.OperatingSystem.valueOf;
+import static com.neotys.xebialabs.xl.NeoLoadTest.OperatingSystem.WINDOWS_RM;
+import static com.neotys.xebialabs.xl.NeoLoadTest.OperatingSystem.WINDOWS_TELNET;
 import static com.xebialabs.overthere.ConnectionOptions.ADDRESS;
 import static com.xebialabs.overthere.ConnectionOptions.OPERATING_SYSTEM;
 import static com.xebialabs.overthere.ConnectionOptions.PASSWORD;
@@ -57,6 +56,10 @@ import static com.xebialabs.overthere.util.CapturingOverthereExecutionOutputHand
 public class NeoLoadTest {
 
 	private static final String SCRIPT_NAME = "NeoLoad-Test";
+	public static final String WINDOWS_TELNET_LABEL = "Windows - Telnet";
+	public static final String WINDOWS_RM_LABEL = "Windows - WinRM";
+	public static final String LINUX_LABEL = "Linux";
+	public static final String MAC_LABEL = "Mac OS";
 	private static final String UNIX_SCP_HOME = "/home/";
 	private static final String MAC_SCP_HOME = "/Users/";
 	private static final String SPACE = " ";
@@ -97,19 +100,18 @@ public class NeoLoadTest {
 	private boolean isCloudUsed = false;
 	private OverthereConnection overthereConnection;
 
-	public NeoLoadTest(String host, String username, String password, String path, String os
-			, String neoloadScenario, String localNeoLoadProject, String neoLoadTestDescription, String neoloadWebAPItoken
-			, String nlcollabprojectname, String collaborationProjectPath, String nbVu, String nbHour) {
-
+	public NeoLoadTest(String host, String username, String password, String path, String OSString,
+					   String neoloadScenario, String localNeoLoadProject, String neoLoadTestDescription, String neoloadWebAPIToken,
+					   String nlcollabprojectname, String collaborationProjectPath, String nbVu, String nbHour) {
 		this.NLHost = host;
 		this.NLUsername = username;
 		this.NLPassword = password;
 		this.NLInstallationPath = path;
-		this.OS = valueOf(os.toLowerCase());
+		this.OS = OperatingSystem.fromName(OSString);
 		this.NLScenarioName = neoloadScenario;
 		this.NLProjectPath = localNeoLoadProject;
 		this.nlTestDescription = neoLoadTestDescription;
-		this.NLWEBAPIToken = neoloadWebAPItoken;
+		this.NLWEBAPIToken = neoloadWebAPIToken;
 		this.NLCollabProjectPath = collaborationProjectPath;
 		this.NLCollabProjectName = nlcollabprojectname;
 		this.NLIsCollab = false;
@@ -232,8 +234,8 @@ public class NeoLoadTest {
 					return UNIX_SCP_HOME + "/";
 				else
 					return UNIX_SCP_HOME + "/" + this.NLUsername + "/";
-			case WINDOWS:
-			case WINDOWSRM:
+			case WINDOWS_TELNET:
+			case WINDOWS_RM:
 				return retrieveWindowsTempFolder();
 		}
 		return null;
@@ -254,7 +256,7 @@ public class NeoLoadTest {
 		CmdLine cmd = new CmdLine();
 		String cmdLine = Paths.get(this.NLInstallationPath, "bin").toString();
 
-		if (OS == WINDOWS || OS == WINDOWSRM) {
+		if (OS == WINDOWS_TELNET || OS == WINDOWS_RM) {
 			cmdLine = Paths.get(cmdLine, "NeoLoadCmd.exe").toString();
 		} else {
 			cmdLine = Paths.get(cmdLine, "NeoLoadCmd").toString();
@@ -355,12 +357,12 @@ public class NeoLoadTest {
 					options.set(CONNECTION_TYPE, SCP);
 					overthereConnection = Overthere.getConnection("ssh", options);
 					break;
-				case WINDOWS:
+				case WINDOWS_TELNET:
 					options.set(OPERATING_SYSTEM, OperatingSystemFamily.WINDOWS);
 					options.set(CONNECTION_TYPE, TELNET);
 					overthereConnection = Overthere.getConnection("cifs", options);
 					break;
-				case WINDOWSRM:
+				case WINDOWS_RM:
 					options.set(OPERATING_SYSTEM, OperatingSystemFamily.WINDOWS);
 					options.set(CONNECTION_TYPE, WINRM_NATIVE);
 					options.set("pathShareMappings", ImmutableMap.of());
@@ -642,6 +644,29 @@ public class NeoLoadTest {
 	}
 
 	 enum OperatingSystem {
-		LINUX, WINDOWS, WINDOWSRM, MAC;
-	}
+
+		 WINDOWS_TELNET(WINDOWS_TELNET_LABEL),
+		 WINDOWS_RM(WINDOWS_RM_LABEL),
+		 LINUX(LINUX_LABEL),
+		 MAC(MAC_LABEL);
+
+		final String name;
+		OperatingSystem(final String name) {
+			this.name = name;
+		}
+
+		 public static OperatingSystem fromName(String osString) {
+			 switch (osString) {
+				 case WINDOWS_TELNET_LABEL:
+				 	return WINDOWS_TELNET;
+				 case WINDOWS_RM_LABEL:
+				 	return WINDOWS_RM;
+				 case LINUX_LABEL:
+				 	return LINUX;
+				 case MAC_LABEL:
+				 	return MAC;
+			 }
+			 throw new IllegalArgumentException("Can not support this OS : " + osString);
+		 }
+	 }
 }
