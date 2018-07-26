@@ -249,17 +249,17 @@ public class NeoLoadTest {
 		return windowsUserHomeDirectory;
 	}
 
-	private CmdLine GenerateCmdLine() throws GeneralSecurityException, UnsupportedEncodingException {
+	private CmdLine generateCmdLine() throws GeneralSecurityException, UnsupportedEncodingException {
 
 		CmdLine cmd = new CmdLine();
-		String CMDline = Paths.get(this.NLInstallationPath, "bin").toString();
+		String cmdLine = Paths.get(this.NLInstallationPath, "bin").toString();
 
 		if (OS == WINDOWS || OS == WINDOWSRM) {
-			CMDline = Paths.get(CMDline, "NeoLoadCmd.exe").toString();
+			cmdLine = Paths.get(cmdLine, "NeoLoadCmd.exe").toString();
 		} else {
-			CMDline = Paths.get(CMDline, "NeoLoadCmd").toString();
+			cmdLine = Paths.get(cmdLine, "NeoLoadCmd").toString();
 		}
-		cmd.addRaw("\"" + CMDline + "\"");
+		cmd.addRaw("\"" + cmdLine + "\"");
 
 		if (NLIsCollab) {
 			cmd.addRaw("-checkoutProject " + "\"" + this.NLCollabProjectName + "\"");
