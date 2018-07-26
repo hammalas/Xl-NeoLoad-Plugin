@@ -264,36 +264,36 @@ public class NeoLoadTest {
 		cmd.addRaw("\"" + cmdLine + "\"");
 
 		if (NLIsCollab) {
-			cmd.addRaw("-Collab " + "\"" + this.NLCollabUrl + this.NLCollabProjectPath + "\"");
-            cmd.addRaw("-CollabLogin " + "\"" + this.NLCollabUsername + ":" + PasswordEncoder.encode(this.NLCollabPassword) + "\"");
-            cmd.addRaw("-checkoutProject " + "\"" + this.NLCollabProjectName + "\"");
+			cmd.addRaw("-Collab " + "'" + this.NLCollabUrl + this.NLCollabProjectPath + "'");
+            cmd.addRaw("-CollabLogin " + "'" + this.NLCollabUsername + ":" + PasswordEncoder.encode(this.NLCollabPassword) + "'");
+            cmd.addRaw("-checkoutProject " + "'" + this.NLCollabProjectName + "'");
         }
 
 		if (NLIsNTS) {
-			cmd.addRaw("-NTS " + "\"" + this.NTSUrl + "\"");
-			cmd.addRaw("-NTSCollabPath " + "\"" + this.NLCollabProjectPath + "\"");
-			cmd.addRaw("-NTSLogin " + "\"" + this.NTSUsername + ":" + PasswordEncoder.encode(this.NTSPassword) + "\"");
-			cmd.addRaw("-checkoutProject " + "\"" + this.NLCollabProjectName + "\"");
+			cmd.addRaw("-NTS " + "'" + this.NTSUrl + "'");
+			cmd.addRaw("-NTSCollabPath " + "'" + this.NLCollabProjectPath + "'");
+			cmd.addRaw("-NTSLogin " + "'" + this.NTSUsername + ":" + PasswordEncoder.encode(this.NTSPassword) + "'");
+			cmd.addRaw("-checkoutProject " + "'" + this.NLCollabProjectName + "'");
 			cmd.addRaw("-publishTestResult ");
-			cmd.addRaw("-leaseLicense " + "\"" + this.NTSLicenseID + ":" + NbVU + ":" + Nbhour + "\"");
+			cmd.addRaw("-leaseLicense " + "'" + this.NTSLicenseID + ":" + NbVU + ":" + Nbhour + "'");
 		}
 
 		if (NlISNLWeb) {
 			cmd.addRaw("-nlweb" + SPACE);
-			cmd.addRaw("-nlwebAPIURL " + "\"" + this.NLWEBURL + "\"");
-			cmd.addRaw("-nlwebToken " + "\"" + this.NLWEBAPIToken + "\"");
+			cmd.addRaw("-nlwebAPIURL " + "'" + this.NLWEBURL + "'");
+			cmd.addRaw("-nlwebToken " + "'" + this.NLWEBAPIToken + "'");
 		}
 
 		if (!NLIsCollab && !NLIsNTS) {
-			cmd.addRaw("-project " + "\"" + this.NLProjectPath + "\"");
+			cmd.addRaw("-project " + "'" + this.NLProjectPath + "'");
 		}
 
 		if (NLIsCloud) {
-			cmd.addRaw("-NCPLogin \"" + this.NLCloudUsername + ":" + PasswordEncoder.encode(this.NLCloudPassword) + "\"");
+			cmd.addRaw("-NCPLogin '" + this.NLCloudUsername + ":" + PasswordEncoder.encode(this.NLCloudPassword) + "'");
 		}
 
 		if (isVariableUsed) {
-			cmd.addRaw("-variables \"" + this.variables + "\"");
+			cmd.addRaw("-variables '" + this.variables + "'");
 		}
 
 		final String fileTempFolder = generateFileTempFolder();
