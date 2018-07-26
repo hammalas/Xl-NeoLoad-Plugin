@@ -263,53 +263,53 @@ public class NeoLoadTest {
         cmd.addRaw("\"" + CMDline + "\"");
 
         if (NLIsCollab) {
-            cmd.addRaw("-checkoutProject " + "\"" + this.NLCollabProjectName + "\"");
-            cmd.addRaw("-Collab " + "\"" + this.NLCollabUrl + this.NLCollabProjectPath + "\"");
-            cmd.addRaw("-CollabLogin " + "\"" + this.NLCollabUsername + ":" + PasswordEncoder.encode(this.NLCollabPassword) + "\"");
+            cmd.addRaw("-checkoutProject " + "'" + this.NLCollabProjectName + "'");
+            cmd.addRaw("-Collab " + "'" + this.NLCollabUrl + this.NLCollabProjectPath + "'");
+            cmd.addRaw("-CollabLogin " + "'" + this.NLCollabUsername + ":" + PasswordEncoder.encode(this.NLCollabPassword) + "'");
         }
 
         if (NLIsNTS) {
-            cmd.addRaw("-NTS " + "\"" + this.NTSUrl + "\"");
-            cmd.addRaw("-NTSCollabPath " + "\"" + this.NLCollabProjectPath + "\"");
-            cmd.addRaw("-NTSLogin " + "\"" + this.NTSUsername + ":" + PasswordEncoder.encode(this.NTSPassword) + "\"");
-            cmd.addRaw("-checkoutProject " + "\"" + this.NLCollabProjectName + "\"");
+            cmd.addRaw("-NTS " + "'" + this.NTSUrl + "'");
+            cmd.addRaw("-NTSCollabPath " + "'" + this.NLCollabProjectPath + "'");
+            cmd.addRaw("-NTSLogin " + "'" + this.NTSUsername + ":" + PasswordEncoder.encode(this.NTSPassword) + "'");
+            cmd.addRaw("-checkoutProject " + "'" + this.NLCollabProjectName + "'");
             cmd.addRaw("-publishTestResult ");
-            cmd.addRaw("-leaseLicense " + "\"" + this.NTSLicenseID + ":" + NbVU + ":" + Nbhour + "\"");
+            cmd.addRaw("-leaseLicense " + "'" + this.NTSLicenseID + ":" + NbVU + ":" + Nbhour + "'");
         }
 
         if (NlISNLWeb) {
             cmd.addRaw("-nlweb" + SPACE);
-            cmd.addRaw("-nlwebAPIURL " + "\"" + this.NLWEBURL + "\"");
-            cmd.addRaw("-nlwebToken " + "\"" + this.NLWEBAPIToken + "\"");
+            cmd.addRaw("-nlwebAPIURL " + "'" + this.NLWEBURL + "'");
+            cmd.addRaw("-nlwebToken " + "'" + this.NLWEBAPIToken + "'");
         }
 
         if (!NLIsCollab && !NLIsNTS) {
-            cmd.addRaw("-project " + "\"" + this.NLProjectPath + "\"");
+            cmd.addRaw("-project " + "'" + this.NLProjectPath + "'");
         }
 
         if (NLIsCloud) {
-            cmd.addRaw("-NCPLogin \"" + this.NLCloudUsername + ":" + PasswordEncoder.encode(this.NLCloudPassword) + "\"");
+            cmd.addRaw("-NCPLogin '" + this.NLCloudUsername + ":" + PasswordEncoder.encode(this.NLCloudPassword) + "'");
         }
 
         if (IsVariableUsed) {
-            cmd.addRaw("-variables \"" + this.Variables + "\"");
+            cmd.addRaw("-variables '" + this.Variables + "'");
         }
 
         if (IsCloudUsed) {
-            cmd.addRaw("-loadGenerators \"" + GenerateFileTempFolder() + "tmp.yaml\"");
+            cmd.addRaw("-loadGenerators '" + GenerateFileTempFolder() + "tmp.yaml'");
         }
 
-        cmd.addRaw("-SLAJUnitMapping \"pass\"");
-        cmd.addRaw("-SLAJUnitResults \"" + GenerateFileTempFolder() + "junit.xml\"");
+        cmd.addRaw("-SLAJUnitMapping 'pass'");
+        cmd.addRaw("-SLAJUnitResults '" + GenerateFileTempFolder() + "junit.xml'");
 
         if (this.ReleaseName != null) {
-            cmd.addRaw("-description \"" + this.NLTestDescription + "_" + this.ReleaseName + "_" + this.ReleaseId + "\"");
+            cmd.addRaw("-description '" + this.NLTestDescription + "_" + this.ReleaseName + "_" + this.ReleaseId + "'");
         } else {
-            cmd.addRaw("-description \"" + this.NLTestDescription + "\"");
+            cmd.addRaw("-description '" + this.NLTestDescription + "'");
         }
 
-        cmd.addRaw("-report \"" + GenerateFileTempFolder() + "report.xml," + GenerateFileTempFolder() + "report.pdf\"");
-        cmd.addRaw("-launch " + "\"" + this.NLScenarioName + "\"");
+        cmd.addRaw("-report '" + GenerateFileTempFolder() + "report.xml," + GenerateFileTempFolder() + "report.pdf'");
+        cmd.addRaw("-launch " + "'" + this.NLScenarioName + "'");
         cmd.addRaw("-noGUI");
 
         return cmd;
