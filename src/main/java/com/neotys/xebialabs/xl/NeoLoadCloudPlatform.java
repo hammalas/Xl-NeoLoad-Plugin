@@ -1,10 +1,8 @@
 package com.neotys.xebialabs.xl;
 
-import java.beans.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import com.xebialabs.deployit.plugin.api.udm.ConfigurationItem;
-import com.xebialabs.deployit.plugin.api.udm.Configuration;
+
 /**
  * Created by hrexed on 15/02/18.
  */
@@ -40,9 +38,9 @@ public class NeoLoadCloudPlatform {
         }
     }
 
-    public void AddCloudLocation(String LocationId,String Number)
+    public void addCloudLocation(String locationId, String number)
     {
-        CloudLocations.add(new CloudBooking(Integer.parseInt(Number),LocationId));
+        CloudLocations.add(new CloudBooking(Integer.parseInt(number),locationId));
     }
 
     private boolean IsCorrectType(String type)
@@ -53,28 +51,28 @@ public class NeoLoadCloudPlatform {
             return false;
     }
 
-    private void AddError(String Type,String message, Exception e)
+    private void AddError(String type,String message, Exception e)
     {
             if(e!=null)
-                errors.append(Type + " : " + message + " excception : " + e.getMessage()).append("\n");
+                errors.append(type + " : " + message + " excception : " + e.getMessage()).append("\n");
             else
-                errors.append(Type+"Error :" + message ).append("\n");
+                errors.append(type+"Error :" + message ).append("\n");
 
     }
-    private void AddOutput(String message)
+    private void addOutput(String message)
     {
          output.append( message ).append("\n");
 
     }
 
-    public CloudResponse GenerateYmlCloudFile()
+    public CloudResponse generateYmlCloudFile()
     {
         int code=0;
         CloudResponse res;
         StringBuilder yml ;
         yml=new StringBuilder();
         try {
-            AddOutput("Generating the YML");
+            addOutput("Generating the YML");
             yml.append("infrastructures:\n");
             yml.append(" - name: My Cloud infrastructure\n");
             yml.append("   type: NEOTYS_CLOUD_LOAD_GENERATOR\n");
@@ -91,7 +89,7 @@ public class NeoLoadCloudPlatform {
             }
 
             if (yml.length() > 0) {
-                AddOutput("YML generated : "+yml.toString());
+                addOutput("YML generated : "+yml.toString());
                 code = 0;
             }
             if (errors.length() > 0)

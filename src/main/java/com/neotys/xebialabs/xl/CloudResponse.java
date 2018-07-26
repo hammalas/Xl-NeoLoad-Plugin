@@ -7,11 +7,11 @@ public class CloudResponse {
     public int rc;
     public String stdout;
     public String stderr;
-    public String YmlContent;
+    public String ymlContent;
 
     public CloudResponse(String content,int code)
     {
-        this.YmlContent=content;
+        this.ymlContent =content;
         this.rc=code;
     }
 

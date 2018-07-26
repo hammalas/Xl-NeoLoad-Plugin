@@ -24,10 +24,10 @@ response=Vars.UpdateVariable()
 
 
 if CreateVar == True :
-    NeoLoadVar=Variable('NeoLoadVariable', response.YmlContent)
+    NeoLoadVar=Variable('NeoLoadVariable', response.ymlContent)
     releaseApi.createVariable(releaseid, NeoLoadVar)
 else:
-    Neoloadupdated.value=response.YmlContent
+    Neoloadupdated.value=response.ymlContent
     releaseApi.updateVariable( Neoloadupdated)
 
 

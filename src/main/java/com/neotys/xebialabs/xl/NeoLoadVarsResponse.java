@@ -11,7 +11,7 @@ public class NeoLoadVarsResponse extends CloudResponse {
     public void appendContent(String Content)
 
     {
-        if(!this.YmlContent.contains(Content))
-             this.YmlContent+=","+Content;
+        if(!this.ymlContent.contains(Content))
+             this.ymlContent +=","+Content;
     }
 }
