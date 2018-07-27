@@ -34,13 +34,13 @@
 
     <type type="NeoLoad.Cloud" extends="xlrelease.Configuration">
         <property name="username" description="Neotys CloudPlatform username" category="input"/>
-        <property name="password" description="Neotys CloudPlatform password" category="password"/>
+        <property name="password" description="Neotys CloudPlatform password" category="input" password="true"/>
     </type>
 
     <type type="NeoLoad.Collaboration" extends="xlrelease.Configuration">
         <property name="Url" category="input"  description="Url to the source control"/>
         <property name="username" description="Collaboration username" category="input"/>
-        <property name="password" description="Collaboration hashed password" category="password"/>
+        <property name="password" description="Collaboration hashed password" category="input" password="true"/>
     </type>
     <type type="NeoLoad.UpdateConstantVariables" extends="xlrelease.PythonScript" label="NeoLoad Update Constant Variable" description="Update Constant a NeoLoad variables">
     <property name="iconLocation" default="neoload.png" hidden="true"/>
