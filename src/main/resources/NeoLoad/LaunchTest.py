@@ -75,11 +75,11 @@ if com is not None:
     comment = Comment(com)
     att = taskApi.commentTask(taskid, comment)
 
-if response.rc == 0:
+if response.responseCode == 0:
     print output
 else:
     print "Exit code "
-    print response.rc
+    print response.responseCode
     print
     print "#### Output:"
     print output
@@ -89,4 +89,4 @@ else:
     print
     print "----"
 
-    sys.exit(response.rc)
+    sys.exit(response.responseCode)

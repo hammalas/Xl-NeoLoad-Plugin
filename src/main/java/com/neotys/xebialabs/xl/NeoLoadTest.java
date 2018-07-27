@@ -33,6 +33,7 @@ import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.nio.file.Paths;
 import java.security.GeneralSecurityException;
+import java.util.Arrays;
 
 import static com.neotys.xebialabs.xl.NeoLoadTest.OperatingSystem.WINDOWS_RM;
 import static com.neotys.xebialabs.xl.NeoLoadTest.OperatingSystem.WINDOWS_TELNET;
@@ -215,20 +216,23 @@ public class NeoLoadTest {
     }
 
     private String generateFileTempFolder() {
-
+        if (operatingSystem == null) {
+            return "";
+        }
         switch (operatingSystem) {
             case MAC:
-                return MAC_SCP_HOME + this.nlUsername + "/";
+            return MAC_SCP_HOME + this.nlUsername + "/";
             case LINUX:
-                if (this.nlUsername.equalsIgnoreCase("root"))
-                    return UNIX_SCP_HOME + "/";
-                else
-                    return UNIX_SCP_HOME + "/" + this.nlUsername + "/";
+            if (this.nlUsername.equalsIgnoreCase("root")) {
+                return UNIX_SCP_HOME + "/";
+            } else {
+                return UNIX_SCP_HOME + "/" + this.nlUsername + "/";
+            }
             case WINDOWS_TELNET:
             case WINDOWS_RM:
-                return retrieveWindowsTempFolder();
+            return retrieveWindowsTempFolder();
         }
-        return null;
+        return "";
     }
 
     private String retrieveWindowsTempFolder() {
@@ -401,31 +405,36 @@ public class NeoLoadTest {
                 final String tempFolder = generateFileTempFolder();
 
                 OverthereFile reportDTDFile = overthereConnection.getFile(Paths.get(tempFolder, "report.dtd").toString());
-                if (reportDTDFile != null) {
+                if (reportDTDFile != null && reportDTDFile.exists()) {
                     response.setReportDTDBytes(getFileByteArray(reportDTDFile, response));
                     reportDTDFile.delete();
+                } else {
+                    response.addToErr("Can not find report file: report.dtd.\n");
                 }
 
                 OverthereFile reportXMLFile = overthereConnection.getFile(Paths.get(tempFolder, "report.xml").toString());
-                if (reportXMLFile.exists()) {
+                if (reportXMLFile != null && reportXMLFile.exists()) {
                     response.setReportXMLBytes(getFileByteArray(reportXMLFile, response));
                     reportXMLFile.delete();
+                } else {
+                    response.addToErr("Can not find report file: report.xml.\n");
                 }
 
                 OverthereFile reportPDFFile = overthereConnection.getFile(Paths.get(tempFolder, "report.pdf").toString());
-                if (reportPDFFile.exists()) {
+                if (reportPDFFile != null && reportPDFFile.exists()) {
                     response.setPDFBytes(getFileByteArray(reportPDFFile, response));
                     reportPDFFile.delete();
+                } else {
+                    response.addToErr("Can not find report file: report.pdf.\n");
                 }
 
                 OverthereFile junitXMLFile = overthereConnection.getFile(Paths.get(tempFolder, "junit.xml").toString());
-                if (junitXMLFile.exists()) {
+                if (junitXMLFile != null && junitXMLFile.exists()) {
                     getJunitData(junitXMLFile.getInputStream(), response);
                     response.setJunitXMLBytes(getFileByteArray(junitXMLFile, response));
-                    response.rc = 1;
                     junitXMLFile.delete();
                 } else {
-                    response.addToErr("No Junit.xml found\n");
+                    response.addToErr("Can not find report file: junit.xml.\n");
                 }
 
                 if (isCloudUsed) {
@@ -444,17 +453,20 @@ public class NeoLoadTest {
             stderr.handleLine(stacktrace.toString());
             response.addToErr(stacktrace.toString());
         } finally {
+            if (response == null) {
+                response = new CmdResponse();
+            }
             response.setComment(comment);
             if (overthereConnection != null) {
                 overthereConnection.close();
             }
-            return response;
         }
+        return response;
     }
 
     private void getData(InputStream inputStream, CmdResponse response) {
         try {
-            // use the factory to create a documentbuilder
+            // use the factory to create a document builder
             DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             Document doc = builder.parse(inputStream);
             String hit = retrieveData(doc, "avg_hits/s");
@@ -489,15 +501,15 @@ public class NeoLoadTest {
             int success = getStats(doc, "/resource/testsuite/testcase/sucess");
             int failure = getStats(doc, "/resource/testsuite/testcase/failure");
             out.append("Results :\n");
-            out.append("\t" + success + " SLAS were sucessful out of " + total);
+            out.append("\t").append(success).append(" SLAS were sucessful out of ").append(total);
 
             if (failure > 0) {
-                error.append(failure + " SlA were in error out of " + total + "\n");
+                error.append(failure).append(" SlA were in error out of ").append(total).append("\n");
                 getError(doc, error);
-                response.addToErr(error);
+                response.addToErr(error.toString());
             }
         } catch (Exception ex) {
-            response.addToErr(ex.getStackTrace().toString());
+            response.addToErr(Arrays.toString(ex.getStackTrace()));
         } finally {
             response.addToOut(out);
             response.addToOut(error);
@@ -515,18 +527,18 @@ public class NeoLoadTest {
         NodeList nodes = (NodeList) xPath.evaluate("/resource/testsuite/testcase/failure", doc.getDocumentElement(), XPathConstants.NODESET);
         for (int i = 0; i < nodes.getLength(); ++i) {
             Node e = nodes.item(i);
-            output.append("Failure n° " + (i + 1) + "\n");
-            output.append("\t" + e.getFirstChild().getNodeValue() + "\n");
+            output.append("Failure n° ").append(i + 1).append("\n");
+            output.append("\t").append(e.getFirstChild().getNodeValue()).append("\n");
         }
     }
 
     public class CmdResponse {
-        public int rc;
+        public int responseCode;
         public String stdout = "";
         public String stderr = "";
-        public String responseTime;
-        public String error;
-        public String hits;
+        private String responseTime;
+        private String error;
+        private String hits;
 
         public byte[] reportXMLBytes;
         public byte[] reportDTDBytes;
@@ -534,13 +546,13 @@ public class NeoLoadTest {
         public byte[] reportPDFBytes;
         public String comment = null;
 
-        public CmdResponse(int rc, String stdout, String stderr) {
-            this.rc = rc;
+        CmdResponse(int responseCode, String stdout, String stderr) {
+            this.responseCode = responseCode;
             this.stdout = stdout;
             this.stderr = stderr;
         }
 
-        public CmdResponse() {
+        CmdResponse() {
 
         }
 
@@ -548,39 +560,34 @@ public class NeoLoadTest {
             this.comment = com.toString();
         }
 
-        public void addStat(String responseTime, String error, String his) {
+        void addStat(String responseTime, String error, String his) {
             this.responseTime = responseTime;
             this.error = error;
             this.hits = his;
         }
 
-        public void addToOut(StringBuilder s) {
+        void addToOut(StringBuilder s) {
             this.stdout += "\n" + s.toString();
         }
 
-        public void addToErr(StringBuilder s) {
-            this.stderr += "\n" + s.toString();
-            this.rc = 0;
-        }
-
-        public void addToErr(String s) {
+        void addToErr(String s) {
             this.stderr += "\n" + s;
-            this.rc = 1;
+            this.responseCode = 1;
         }
 
-        public void setReportXMLBytes(byte[] reportXMLBytes) {
+        void setReportXMLBytes(byte[] reportXMLBytes) {
             this.reportXMLBytes = reportXMLBytes;
         }
 
-        public void setReportDTDBytes(byte[] reportDTDBytes) {
+        void setReportDTDBytes(byte[] reportDTDBytes) {
             this.reportDTDBytes = reportDTDBytes;
         }
 
-        public void setPDFBytes(byte[] reportPDFBytes) {
+        void setPDFBytes(byte[] reportPDFBytes) {
             this.reportPDFBytes = reportPDFBytes;
         }
 
-        public void setJunitXMLBytes(byte[] junitXMLBytes) {
+        void setJunitXMLBytes(byte[] junitXMLBytes) {
             this.junitXMLBytes = junitXMLBytes;
         }
     }
