@@ -61,7 +61,8 @@ public class NeoLoadTest {
     private static final String MAC_LABEL = "Mac OS";
     private static final String UNIX_SCP_HOME = "/home/";
     private static final String MAC_SCP_HOME = "/Users/";
-    private static final String SPACE = " ";
+    private static final String UNIX_FILE_SEPARATOR = "/";
+    private static final String WINDOWS_FILE_SEPARATOR = "\\";
     private OperatingSystem operatingSystem;
     private String nlInstallationPath;
     private String nlProjectPath;
@@ -255,7 +256,7 @@ public class NeoLoadTest {
         } else {
             cmdLine = Paths.get(cmdLine, "NeoLoadCmd").toString();
         }
-        cmd.addRaw("\"" + cmdLine + "\"");
+        cmd.addRaw("\"" + replaceFileSeparator(cmdLine, operatingSystem) + "\"");
 
         if (nlIsCollab) {
             cmd.addRaw("-Collab " + "'" + this.nlCollabUrl + this.nlCollabProjectPath + "'");
@@ -273,7 +274,7 @@ public class NeoLoadTest {
         }
 
         if (nlIsNlweb) {
-            cmd.addRaw("-nlweb" + SPACE);
+            cmd.addRaw("-nlweb ");
             cmd.addRaw("-nlwebAPIURL " + "'" + this.nlWebUrl + "'");
             cmd.addRaw("-nlwebToken " + "'" + this.nlWebAPIToken + "'");
         }
@@ -292,11 +293,11 @@ public class NeoLoadTest {
 
         final String fileTempFolder = generateFileTempFolder();
         if (isCloudUsed) {
-            cmd.addRaw("-loadGenerators '" + Paths.get(fileTempFolder, "tmp.yaml'").toString());
+            cmd.addRaw("-loadGenerators '" + replaceFileSeparator(Paths.get(fileTempFolder, "tmp.yaml'").toString(), operatingSystem));
         }
 
         cmd.addRaw("-SLAJUnitMapping 'pass'");
-        cmd.addRaw("-SLAJUnitResults '" + Paths.get(fileTempFolder, "junit.xml'").toString());
+        cmd.addRaw("-SLAJUnitResults '" + replaceFileSeparator(Paths.get(fileTempFolder, "junit.xml'").toString(), operatingSystem));
 
         if (this.releaseName != null) {
             cmd.addRaw("-description '" + this.nlTestDescription + "_" + this.releaseName + "_" + this.releaseId + "'");
@@ -304,11 +305,24 @@ public class NeoLoadTest {
             cmd.addRaw("-description '" + this.nlTestDescription + "'");
         }
 
-        cmd.addRaw("-report '" + Paths.get(fileTempFolder, "report.xml").toString() + "," + Paths.get(fileTempFolder, "report.pdf").toString() + "'");
+        cmd.addRaw("-report '" + replaceFileSeparator(Paths.get(fileTempFolder, "report.xml").toString(), operatingSystem)
+                + "," + replaceFileSeparator(Paths.get(fileTempFolder, "report.pdf").toString(), operatingSystem) + "'");
         cmd.addRaw("-launch " + "'" + this.nlScenarioName + "'");
         cmd.addRaw("-noGUI");
 
         return cmd;
+    }
+
+    private String replaceFileSeparator(final String filePath, final OperatingSystem operatingSystem) {
+        switch (operatingSystem) {
+            case LINUX:
+            case MAC:
+                return filePath.replaceAll("\\\\", UNIX_FILE_SEPARATOR);
+            case WINDOWS_TELNET:
+            case WINDOWS_RM:
+                return filePath.replaceAll("/", WINDOWS_FILE_SEPARATOR);
+        }
+        throw new IllegalArgumentException("Can not support this operation system");
     }
 
     private byte[] getFileByteArray(OverthereFile file, CmdResponse response) {
@@ -404,7 +418,7 @@ public class NeoLoadTest {
 
                 final String tempFolder = generateFileTempFolder();
 
-                OverthereFile reportDTDFile = overthereConnection.getFile(Paths.get(tempFolder, "report.dtd").toString());
+                OverthereFile reportDTDFile = overthereConnection.getFile(replaceFileSeparator(Paths.get(tempFolder, "report.dtd").toString(), operatingSystem));
                 if (reportDTDFile != null && reportDTDFile.exists()) {
                     response.setReportDTDBytes(getFileByteArray(reportDTDFile, response));
                     reportDTDFile.delete();
@@ -412,7 +426,7 @@ public class NeoLoadTest {
                     response.addToErr("Can not find report file: report.dtd.\n");
                 }
 
-                OverthereFile reportXMLFile = overthereConnection.getFile(Paths.get(tempFolder, "report.xml").toString());
+                OverthereFile reportXMLFile = overthereConnection.getFile(replaceFileSeparator(Paths.get(tempFolder, "report.xml").toString(), operatingSystem));
                 if (reportXMLFile != null && reportXMLFile.exists()) {
                     response.setReportXMLBytes(getFileByteArray(reportXMLFile, response));
                     reportXMLFile.delete();
@@ -420,7 +434,7 @@ public class NeoLoadTest {
                     response.addToErr("Can not find report file: report.xml.\n");
                 }
 
-                OverthereFile reportPDFFile = overthereConnection.getFile(Paths.get(tempFolder, "report.pdf").toString());
+                OverthereFile reportPDFFile = overthereConnection.getFile(replaceFileSeparator(Paths.get(tempFolder, "report.pdf").toString(), operatingSystem));
                 if (reportPDFFile != null && reportPDFFile.exists()) {
                     response.setPDFBytes(getFileByteArray(reportPDFFile, response));
                     reportPDFFile.delete();
@@ -428,7 +442,7 @@ public class NeoLoadTest {
                     response.addToErr("Can not find report file: report.pdf.\n");
                 }
 
-                OverthereFile junitXMLFile = overthereConnection.getFile(Paths.get(tempFolder, "junit.xml").toString());
+                OverthereFile junitXMLFile = overthereConnection.getFile(replaceFileSeparator(Paths.get(tempFolder, "junit.xml").toString(), operatingSystem));
                 if (junitXMLFile != null && junitXMLFile.exists()) {
                     getJunitData(junitXMLFile.getInputStream(), response);
                     response.setJunitXMLBytes(getFileByteArray(junitXMLFile, response));
@@ -438,7 +452,7 @@ public class NeoLoadTest {
                 }
 
                 if (isCloudUsed) {
-                    OverthereFile tmpYamlFile = overthereConnection.getFile(Paths.get(tempFolder, "tmp.yaml").toString());
+                    OverthereFile tmpYamlFile = overthereConnection.getFile(replaceFileSeparator(Paths.get(tempFolder, "tmp.yaml").toString(), operatingSystem));
                     if (tmpYamlFile.exists()) {
                         tmpYamlFile.delete();
                     }
