@@ -9,27 +9,16 @@ public class CloudResponse {
     public String stderr;
     public String ymlContent;
 
-    public CloudResponse(String content,int code)
-    {
-        this.ymlContent =content;
-        this.rc=code;
+    CloudResponse(String content, int code) {
+        this.ymlContent = content;
+        this.rc = code;
     }
 
-
-    public void addToOut(StringBuilder s)
-    {
-
-        this.stdout+="\n" + s.toString();
+    void addToOut(StringBuilder s) {
+        this.stdout += "\n" + s.toString();
     }
 
-    public void addToError(StringBuilder s)
-    {
-
-        this.stderr+="\n" + s.toString();
+    void addToError(StringBuilder s) {
+        this.stderr += "\n" + s.toString();
     }
-
-
-
-
-
 }

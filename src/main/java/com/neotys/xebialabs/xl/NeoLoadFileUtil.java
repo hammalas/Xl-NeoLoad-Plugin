@@ -16,81 +16,56 @@ import java.io.InputStream;
 /**
  * Created by hrexed on 04/04/18.
  */
-public  class  NeoLoadFileUtil {
+public class NeoLoadFileUtil {
 
-    static final String HITS="hits";
-    static final String ERRORS="error";
-    static final String RESPONSE="response";
-    static final String CUSTOM="custom";
+    private static final String HITS = "hits";
+    private static final String ERRORS = "error";
+    private static final String RESPONSE = "response";
 
-    public static String getCustomStat(String xpath, byte[] bytes)
-    {
-        String result = null;
-
-        try{
-
-            InputStream input= new ByteArrayInputStream(bytes);
+    public static String getCustomStat(String xpath, byte[] bytes) {
+        try {
+            InputStream input = new ByteArrayInputStream(bytes);
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
-            Document doc=builder.parse(input);
+            Document doc = builder.parse(input);
 
-            result=GetCustomData(doc,xpath);
-
-        }
-        catch(Exception e)
-        {
+            return GetCustomData(doc, xpath);
+        } catch (Exception e) {
             return e.getMessage();
         }
-        finally {
-            return result;
-        }
     }
-    public static String GetStat(String type, byte[] bytes) throws IOException, SAXException, ParserConfigurationException, XPathExpressionException {
-        String result = null;
 
-        InputStream input= new ByteArrayInputStream(bytes);
+    public static String GetStat(String type, byte[] bytes) throws IOException, SAXException, ParserConfigurationException, XPathExpressionException {
+        InputStream input = new ByteArrayInputStream(bytes);
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
-        Document doc=builder.parse(input);
+        Document doc = builder.parse(input);
 
-        switch(type)
-        {
+        switch (type) {
             case HITS:
-                result=GetData(doc,"avg_hits/s");
-                break;
+                return GetData(doc, "avg_hits/s");
             case ERRORS:
-                result=GetData(doc,"total_errors");
-                break;
+                return GetData(doc, "total_errors");
             case RESPONSE:
-                result=GetData(doc,"avg_reqresponsetime");
-                break;
-
-
+                return GetData(doc, "avg_reqresponsetime");
         }
-        return result;
-
-
+        return null;
     }
 
-
-
-    public static String GetData(Document doc,String key) throws XPathExpressionException {
+    private static String GetData(Document doc, String key) throws XPathExpressionException {
         XPath xPath = XPathFactory.newInstance().newXPath();
         String result = null;
-        NodeList nodes = (NodeList)xPath.evaluate("/report/summary/statistics/statistic[@name='"+key+"']", doc.getDocumentElement(), XPathConstants.NODESET);
+        NodeList nodes = (NodeList) xPath.evaluate("/report/summary/statistics/statistic[@name='" + key + "']", doc.getDocumentElement(), XPathConstants.NODESET);
         for (int i = 0; i < nodes.getLength(); ++i) {
             Element e = (Element) nodes.item(i);
-            result= e.getAttribute("value");
-
+            result = e.getAttribute("value");
         }
         return result;
     }
-    public static String GetCustomData(Document doc,String Xpath) throws XPathExpressionException {
-        XPath xPath = XPathFactory.newInstance().newXPath();
-        String result = null;
-        XPathExpression xPathExpression = xPath.compile(Xpath);
-        result=  (String)xPathExpression.evaluate(doc, XPathConstants.STRING);
 
-        return result;
+    private static String GetCustomData(Document doc, String Xpath) throws XPathExpressionException {
+        XPath xPath = XPathFactory.newInstance().newXPath();
+        XPathExpression xPathExpression = xPath.compile(Xpath);
+        return (String) xPathExpression.evaluate(doc, XPathConstants.STRING);
     }
 }

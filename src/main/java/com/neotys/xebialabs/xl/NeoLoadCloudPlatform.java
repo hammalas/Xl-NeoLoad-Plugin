@@ -7,99 +7,94 @@ import java.util.List;
  * Created by hrexed on 15/02/18.
  */
 public class NeoLoadCloudPlatform {
-    private String CloudWorkGroup;
+    private String cloudWorkGroup;
     private int duration;
-    private List<CloudBooking> CloudLocations;
+    private List<CloudBooking> cloudLocations;
     private StringBuilder errors;
     private StringBuilder output;
-    private String CloudType;
-    private final static String MEDIUM="MEDIUM";
-    private final static String LARGE="LARGE";
+    private String cloudType;
+    private static final String MEDIUM = "MEDIUM";
+    private static final String LARGE = "LARGE";
 
-    public NeoLoadCloudPlatform(String Worgroup, String duration,String type)
-    {
-        CloudLocations=new ArrayList<CloudBooking>();
+    public NeoLoadCloudPlatform(String cloudWorgroup, String duration, String cloudType) {
+        cloudLocations = new ArrayList<>();
         errors = new StringBuilder();
-        output= new StringBuilder();
-        try
-        {
-            if(IsCorrectType(type))
-                this.CloudType=type.toUpperCase();
-            else
-                this.CloudType=MEDIUM;
+        output = new StringBuilder();
+        try {
+            if (isCorrectType(cloudType)) {
+                this.cloudType = cloudType.toUpperCase();
+            } else {
+                this.cloudType = MEDIUM;
+            }
 
-            this.CloudWorkGroup=Worgroup;
-            this.duration=Integer.parseInt(duration);
+            this.cloudWorkGroup = cloudWorgroup;
+            this.duration = Integer.parseInt(duration);
 
-        }
-        catch(NumberFormatException e)
-        {
-            AddError("ERROR","Conversion issue",e);
+        } catch (NumberFormatException e) {
+            addError("ERROR", "Conversion issue", e);
         }
     }
 
-    public void addCloudLocation(String locationId, String number)
-    {
-        CloudLocations.add(new CloudBooking(Integer.parseInt(number),locationId));
+    public void addCloudLocation(String locationId, String number) {
+        cloudLocations.add(new CloudBooking(Integer.parseInt(number), locationId));
     }
 
-    private boolean IsCorrectType(String type)
-    {
-        if(type.equalsIgnoreCase(MEDIUM)||type.equalsIgnoreCase(LARGE))
-            return true;
-        else
-            return false;
+    private boolean isCorrectType(String type) {
+        return type.equalsIgnoreCase(MEDIUM) || type.equalsIgnoreCase(LARGE);
     }
 
-    private void AddError(String type,String message, Exception e)
-    {
-            if(e!=null)
-                errors.append(type + " : " + message + " excception : " + e.getMessage()).append("\n");
-            else
-                errors.append(type+"Error :" + message ).append("\n");
-
+    private void addError(String type, String message, Exception e) {
+        if (e != null) {
+            errors.append(type)
+                    .append(" : ")
+                    .append(message)
+                    .append(" excception : ")
+                    .append(e.getMessage())
+                    .append("\n");
+        } else {
+            errors.append(type)
+                    .append("Error :")
+                    .append(message)
+                    .append("\n");
+        }
     }
-    private void addOutput(String message)
-    {
-         output.append( message ).append("\n");
 
+    private void addOutput(String message) {
+        output.append(message).append("\n");
     }
 
-    public CloudResponse generateYmlCloudFile()
-    {
-        int code=0;
+    public CloudResponse generateYmlCloudFile() {
+        int code = 0;
         CloudResponse res;
-        StringBuilder yml ;
-        yml=new StringBuilder();
+        StringBuilder yml;
+        yml = new StringBuilder();
         try {
             addOutput("Generating the YML");
             yml.append("infrastructures:\n");
             yml.append(" - name: My Cloud infrastructure\n");
             yml.append("   type: NEOTYS_CLOUD_LOAD_GENERATOR\n");
-            yml.append("   workgroup: " + this.CloudWorkGroup+"\n");
-            yml.append("   architecture: " + this.CloudType+"\n");
+            yml.append("   workgroup: " + this.cloudWorkGroup + "\n");
+            yml.append("   architecture: " + this.cloudType + "\n");
             yml.append("   duration: " + this.duration + "h\n");
             yml.append("   zones:\n");
-            for (int i = 0; i < CloudLocations.size(); i++) {
-
-                if(CloudLocations.get(i).GetCloudZoneID()==null)
-                    AddError("Location", "Location NUll",null);
-                yml.append("   - id: " + CloudLocations.get(i).GetCloudZoneID()+"\n");
-                yml.append("     count: " + CloudLocations.get(i).getNumberOfLG()+"\n");
+            for (int i = 0; i < cloudLocations.size(); i++) {
+                if (cloudLocations.get(i).getCloudZoneID() == null) {
+                    addError("Location", "Location NUll", null);
+                }
+                yml.append("   - id: " + cloudLocations.get(i).getCloudZoneID() + "\n");
+                yml.append("     count: " + cloudLocations.get(i).getNumberOfLG() + "\n");
             }
 
             if (yml.length() > 0) {
-                addOutput("YML generated : "+yml.toString());
+                addOutput("YML generated : " + yml.toString());
                 code = 0;
             }
             if (errors.length() > 0)
                 code = 1;
+        } catch (Exception e) {
+            addError("ERROR", "Technical Error", e);
         }
-        catch (Exception e)
-        {
-            AddError("ERROR", "Technical Error",e);
-        }
-        res= new CloudResponse(yml.toString(),code);
+        res = new CloudResponse(yml.toString(), code);
 
         res.addToError(errors);
         res.addToOut(output);
