@@ -10,34 +10,43 @@ def GetNeoLoadData(title, releaseid, trendingtype):
     result = "\"data_graph\":[ "
 
     try:
-        TasksList = _taskApi.searchTasksByTitle(title, None, releaseid)
-        for task in TasksList:
-            if task.type.name == "CustomScriptTask":
-                # if task.type=="NeoLoad.LaunchTest" :
-                attachmens = task.attachments
-                for att in attachmens:
-                    if "report.xml" in att.exportFilename:
-                        file_byte = _releaseApi.getAttachment(att.id)
-                        if trendingtype == "Hit/s":
-                            hits = NeoLoadFileUtil.GetStat("hits", file_byte)
-                            result += "{\"kpi\":" + hits + "},"
-                        if trendingtype == "Response Time":
-                            error = NeoLoadFileUtil.GetStat("response", file_byte)
-                            result += "{\"kpi\":" + error + "},"
-                        if trendingtype == "Errors":
-                            response = NeoLoadFileUtil.GetStat("error", file_byte)
-                            result += "{\"kpi\":" + response + "},"
-
-        if result[-1:] == ",":
-            result = result[:-1]
-
-        result += "]"
-
-        output += result + "}"
-        return output
+        release = _releaseApi.getRelease(releaseid)
     except Exception as e:
-        print  e.getMessage()
-        return None
+        print e.getMessage()
+        release = _releaseApi.getArchivedRelease(releaseid)
+
+    phases = release.phases
+
+    tasks = []
+    for phase in phases:
+        for t in phase.tasks:
+            if t.title == title:
+                tasks.append(t)
+
+    for task in tasks:
+        if task.type.name == "CustomScriptTask":
+            # if task.type=="NeoLoad.LaunchTest" :
+            attachmens = task.attachments
+            for att in attachmens:
+                if "report.xml" in att.exportFilename:
+                    file_byte = _releaseApi.getAttachment(att.id)
+                    if trendingtype == "Hit/s":
+                        hits = NeoLoadFileUtil.GetStat("hits", file_byte)
+                        result += "{\"kpi\":" + hits + "},"
+                    if trendingtype == "Response Time":
+                        error = NeoLoadFileUtil.GetStat("response", file_byte)
+                        result += "{\"kpi\":" + error + "},"
+                    if trendingtype == "Errors":
+                        response = NeoLoadFileUtil.GetStat("error", file_byte)
+                        result += "{\"kpi\":" + response + "},"
+
+    if result[-1:] == ",":
+        result = result[:-1]
+
+    result += "]"
+
+    output += result + "}"
+    return output
 
 
 releaseid = release.id
