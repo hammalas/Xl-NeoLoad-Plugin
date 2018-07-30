@@ -8,12 +8,14 @@
 <synthetic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xmlns="http://www.xebialabs.com/deployit/synthetic"
            xsi:schemaLocation="http://www.xebialabs.com/deployit/synthetic synthetic.xsd">
-    <type type="NeoLoad.Controller" extends="xlrelease.Configuration">
+
+    <!-- NEOLOAD CONFIGURATIONS -->
+    <type type="NeoLoad.Controller" label="NeoLoad Controller" extends="xlrelease.Configuration">
         <property name="NL_Host" default="/opt/NeoLoad/bin/NeoLoadCmd" required="true" label="NeoLoad Host" description="Host where NeoLoad is installed" category="input" />
         <property name="NL_Controller_Path" default="/opt/NeoLoad/" required="true" label="NeoLoad Installation path" description="Path to the NeoLoad installation" category="input" />
         <property name="username" description="The username to connect to the NeoLoad Controller" category="input" label="Login" />
         <property name="password" description="The password to connect to the NeoLoad Controller" category="input" password="true" label="password"/>
-        <property name="OS" label="OS" required="true" default="Linux" description="OS the NL instance Linux (ssh), Windows, Mac OS" kind="enum">
+        <property name="OS" label="System Operation" required="true" default="Linux" description="OS the NL instance Linux (ssh), Windows, Mac OS" kind="enum">
         <enum-values>
             <value>Windows - Telnet</value>
             <value>Windows - WinRM</value>
@@ -22,30 +24,31 @@
         </enum-values>
         </property>
     </type>
-    <type type="NeoLoad.WEB" extends="xlrelease.Configuration">
-        <property name="NL_WEB_URL" default="https://neoload-api.saas.neotys.com" required="false" label="Neoload WEB API url" description="Url of the NeoLoad Web API Interface" category="input" />
+    <type type="NeoLoad.WEB" label="NeoLoad Web" extends="xlrelease.Configuration">
+        <property name="NL_WEB_URL" default="https://neoload-api.saas.neotys.com" required="false" label="NeoLoad WEB API url" description="Url of the NeoLoad Web API Interface" category="input" />
     </type>
-    <type type="NeoLoad.TeamServer" extends="xlrelease.Configuration">
+    <type type="NeoLoad.TeamServer" label="NeoLoad Team Server" extends="xlrelease.Configuration">
         <property name="TeamServerHost" label="Neotys Team Server URL" description="Neotys Team Server URL" category="Configuration"/>
-        <property name="username" label="Neotys Team Server UserName" description="Neotys Team Server username" category="Configuration"/>
+        <property name="username" label="Neotys Team Server User name" description="Neotys Team Server username" category="Configuration"/>
         <property name="password" label="Neotys Team Server Password" description="Neotys Team Server password" password="true" category="Configuration"/>
         <property name="licenceID" label="License Identifier" description="License identifier of your shared license" category="Configuration"/>
     </type>
-
     <type type="NeoLoad.Cloud" extends="xlrelease.Configuration">
-        <property name="username" description="Neotys CloudPlatform username" category="input"/>
-        <property name="password" description="Neotys CloudPlatform password" category="input" password="true"/>
+        <property name="username" label="User name" description="Neotys CloudPlatform username" category="input"/>
+        <property name="password" label="Password" description="Neotys CloudPlatform password" category="input" password="true"/>
+    </type>
+    <type type="NeoLoad.Collaboration" label="NeoLoad Collaboration" extends="xlrelease.Configuration">
+        <property name="Url" category="input"  description="Url to the source control"/>
+        <property name="username" label="User name" description="Collaboration username" category="input"/>
+        <property name="password" label="Password" description="Collaboration hashed password" category="input" password="true"/>
     </type>
 
-    <type type="NeoLoad.Collaboration" extends="xlrelease.Configuration">
-        <property name="Url" category="input"  description="Url to the source control"/>
-        <property name="username" description="Collaboration username" category="input"/>
-        <property name="password" description="Collaboration hashed password" category="input" password="true"/>
-    </type>
+
+    <!-- NEOLOAD TASKS -->
     <type type="NeoLoad.UpdateConstantVariables" extends="xlrelease.PythonScript" label="NeoLoad Update Constant Variable" description="Update Constant a NeoLoad variables">
     <property name="iconLocation" default="neoload.png" hidden="true"/>
     <property name="taskColor" hidden="true" default="##6CBF09" />
-        <property name="ConstantVariableName"   required="true" label="Name of the Neolaod Variable"  category="input"/>
+        <property name="ConstantVariableName"   required="true" label="Name of the NeoLoad Variable"  category="input"/>
         <property name="ConstantVariableValue"  required="true" label="Value of the NeoLoad Variable"  category="input"/>
         <property name="NeoLoadVariable" hidden="true" default="-1" category="output" />
     </type>
@@ -53,8 +56,8 @@
         <property name="iconLocation" default="neoload.png" hidden="true"/>
         <property name="taskColor" hidden="true" default="##6CBF09" />
         <property name="NeoLoadPath"  kind="ci" required="true" label="NeoLoad" referenced-type="NeoLoad.Controller" category="input"/>
-        <property name="NeoLoadWebAPI" kind="ci" required="false" label="Neolaod Web API" referenced-type="NeoLoad.WEB" category="input"/>
-        <property name="NeoloadWebAPItoken" category="input" required="false" label="NeoLoad Web token" description="NeoLaod WEB API Token"/>
+        <property name="NeoLoadWebAPI" kind="ci" required="false" label="NeoLoad Web API" referenced-type="NeoLoad.WEB" category="input"/>
+        <property name="NeoloadWebAPItoken" category="input" required="false" label="NeoLoad Web token" description="NeoLoad WEB API Token"/>
         <property name="NeoloadCloudPlatform" kind="ci" category="input" required="false" referenced-type="NeoLoad.Cloud" />
         <property name="NeoLoadTeamServer"  kind="ci" required="false" category="input" label="NTS" referenced-type="NeoLoad.TeamServer" />
         <property name="NumberOfUser"   required="false" category="input" label="NBSharedVu" description="Number of virtual user" />
@@ -63,7 +66,7 @@
         <property name="LocalNeoLoadProject" category="input" required="false" description="path to the local NeoLoad project" label="NeoLoad project Name"/>
         <property name="CollaborationProjectPath" category="input" required="false"/>
         <property name="CollabProjectName" category="input" required="false" label="Collaboration Project Name" description="Name of the shared project"/>
-        <property name="NeoloadScenario" category="input" required="true" label="Neoload scenario" description="Name of the NeoLoad test to launch"/>
+        <property name="NeoloadScenario" category="input" required="true" label="NeoLoad scenario" description="Name of the NeoLoad test to launch"/>
         <property name="NeoLoadTestDescription" category="input" required="false" label="Test Description" description="Description of the test"/>
       </type>
     <type type="NeoLoad.LaunchNeoLoadCloudSession" extends="xlrelease.PythonScript" label="NeoLoad Cloud Session" description="Launch NeoLoad Cloud Session">
@@ -97,10 +100,8 @@
         <property name="ap_east_2" label="Asia-Pacific China (Hong Kong 2)" description="Number of Rackspace Asia-Pacific China (Hong Kong 2)" required="false" category="input"/>
         <property name="ap_southeast_4" label="Asia-Pacific Australia (Sydney 2)" description="Number of Rackspace Asia-Pacific Australia (Sydney 2)" required="false" category="input"/>
         <property name="eu_west_2" label="Europe United Kingdom (London 1)" description="Number of Rackspace Europe United Kingdom (London 1)" required="false" category="input"/>
-
         <property name="eu_center_1" label="Europe Switzerland (Zurich)" description="Number of CloudSigma Europe Switzerland (Zurich)" required="false" category="input"/>
         <property name="ap_east_1" label="Asia-Pacific China (Hong Kong 1)" description="Number of Azure Asia-Pacific China (Hong Kong 1)" required="false" category="input"/>
-
         <property name="ap_northeast_2" label="Asia-Pacific Japan (Saitama)" description="Number of Azure Asia-Pacific Japan (Saitama)" required="false" category="input"/>
         <property name="ap_northeast_3" label="Asia-Pacific Japan (Osaka)" description="Number of Azure Asia-Pacific Japan (Osaka)" required="false" category="input"/>
         <property name="ap_northeast_5" label="Asia-Pacific South Korea (Seoul 2)" description="Number of Azure Asia-Pacific South Korea (Seoul 2)" required="false" category="input"/>
@@ -123,9 +124,7 @@
         <property name="us_west_7" label="USA West - California (San Francisco)" description="Number of Azure USA West - California (San Francisco)" required="false" category="input"/>
         <property name="us_west_8" label="USA West - California (Los Angeles)" description="Number of Azure USA West - California (Los Angeles)" required="false" category="input"/>
         <property name="us_west_9" label="USA West - Arizona (Phoenix)" description="Number of Azure USA West - Arizona (Phoenix)" required="false" category="input"/>
-
         <property name="ap_east_3" label="Asia-Pacific Taiwan (Changhua County)" description="Number of Google Cloud Asia-Pacific Taiwan (Changhua County)" required="false" category="input"/>
-
         <property name="ap_northeast_7" label="Asia-Pacific Japan (Tokyo 2)" description="Number of Google Cloud Asia-Pacific Japan (Tokyo 2)" required="false" category="input"/>
         <property name="ap_southeast_8" label="Asia-Pacific Singapore 3" description="Number of Google Cloud Asia-Pacific Singapore 3" required="false" category="input"/>
         <property name="eu_west_7" label="Europe Belgium (St. Ghislain)" description="Number of Google Cloud Europe Belgium (St. Ghislain)" required="false" category="input"/>
@@ -133,11 +132,9 @@
         <property name="us_east_9" label="USA East - Virginia (Ashburn 3)" description="Number of Google Cloud USA East - Virginia (Ashburn 3)" required="false" category="input"/>
         <property name="us_northcentral_4" label="USA Central - Iowa (Council Bluffs)" description="Number of Google Cloud USA Central - Iowa (Council Bluffs)" required="false" category="input"/>
         <property name="us_west_6" label="USA West - Oregon (The Dalles)" description="Number of Google Cloud USA West - Oregon (The Dalles)" required="false" category="input"/>
-
         <property name="eu_west_8" label="Europe France (Strasbourg)" description="Number of OVH Europe France (Strasbourg)" required="false" category="input"/>
         <property name="eu_west_11" label="Europe France (Gravelines)" description="Number of OVH Europe France (Gravelines)" required="false" category="input"/>
         <property name="na_northeast_1" label="North-America Canada (Montreal 1)" description="Number of OVH North-America Canada (Montreal 1)" required="false" category="input"/>
-
         <property name="eu_west_3" label="Europe United Kingdom (London 2)" description="Number of Softlayer Europe United Kingdom (London 2)" required="false" category="input"/>
         <property name="eu_west_9" label="Europe France (Paris 1)" description="Number of Softlayer Europe France (Paris 1)" required="false" category="input"/>
         <property name="eu_west_10" label="Europe Netherlands (Amsterdam 3)" description="Number of Softlayer Europe Netherlands (Amsterdam 3)" required="false" category="input"/>
@@ -154,22 +151,19 @@
         <property name="us_east_2" label="USA East - Washington, D.C." description="Number of Softlayer USA East - Washington, D.C." required="false" category="input"/>
         <property name="ap_southeast_5" label="Asia-Pacific Australia (Melbourne 1)" description="Number of Softlayer Asia-Pacific Australia (Melbourne 1)" required="false" category="input"/>
         <property name="ap_south_1" label="Asia-Pacific India (Chennai 1)" description="Number of Softlayer Asia-Pacific India (Chennai 1)" required="false" category="input"/>
-
         <property name="eu_west_4" label="Europe France (Paris 2)" description="Number of Outscale Europe France (Paris 2)" required="false" category="input"/>
         <property name="us_east_7" label="USA East - New Jersey" description="Number of Outscale USA East - New Jersey" required="false" category="input"/>
 
-
         <property name="NeoLoadCloudYML"  hidden="true"  default="-1" label="YML file" category="output"/>
-
     </type>
 
 
-    <type type="NeoLoad.NeoLoadTrendingTile" label="NeoLoad Trending tile" extends="xlrelease.Tile">
+    <!-- NEOLOAD TREND TILES -->
+    <type type="NeoLoad.NeoLoadTrendingTile" label="NeoLoad Trending Tile" extends="xlrelease.Tile">
         <property name="uri" hidden="true" default="NeoLoad/NeoLoadTrendingTile/neoloadtrending-summary-view.html"/>
         <property name="detailsUri" hidden="true" default="NeoLoad/NeoLoadTrendingTile/neoload-details-view.html"/>
         <property name="title" description="Tile title" default="NeoLoad Trending Graph"/>
-       <!-- <property name="embedded" kind="boolean" hidden="true" default="true" required="false"/>-->
-        <property category="input" name="NeoLoadTaskTitle"  label="Name of the NeoLoad tasks" description="Name of the Neoload xl release tasks" required="true"/>
+        <property category="input" name="NeoLoadTaskTitle"  label="Name of the NeoLoad tasks" description="Name of the NeoLoad xl release tasks" required="true"/>
         <property name="TrendingData" category="input" label="Type of Data" required="true" default="Response Time" description="Metrics that you would like to Trend" kind="enum">
             <enum-values>
                 <value>Hit/s</value>
@@ -181,17 +175,14 @@
         <property name="userSpecificCache" kind="boolean" hidden="true" default="false" description="True if tile data should be cached per user."/>
         <property name="expirationTime" kind="integer" hidden="true" default="3" description="Expiration time for a tile cache (in seconds)."/>
         <property name="maxCacheEntries" kind="integer" hidden="true" default="1" description="Maximum cache entries."/>
-  </type>
-    <type type="NeoLoad.NeoLoadCustomTrendingTile" label="NeoLoad Custom Trending tile" extends="xlrelease.Tile">
+    </type>
+    <type type="NeoLoad.NeoLoadCustomTrendingTile" label="NeoLoad Custom Trending Tile" extends="xlrelease.Tile">
         <property name="uri" hidden="true" default="NeoLoad/NeoLoadTrendingTile/neoloadcustomtrending-summary-view.html"/>
         <property name="detailsUri" hidden="true" default="NeoLoad/NeoLoadTrendingTile/neoloadcustom-details-view.html"/>
         <property name="title" description="Tile title" default="NeoLoad custom Trending Graph"/>
-        <!-- <property name="embedded" kind="boolean" hidden="true" default="true" required="false"/>-->
-        <property category="input" name="NeoLoadTaskTitle"  label="Name of the NeoLoad tasks" description="Name of the Neoload xl release tasks" required="true"/>
+        <property category="input" name="NeoLoadTaskTitle"  label="Name of the NeoLoad tasks" description="Name of the NeoLoad xl release tasks" required="true"/>
         <property category="input" name="NeoLoadKpiName"  label="Name of the metrics to trend" description="Name of the NeoLoad Kpi to trend" required="true"/>
-
         <property name="reportXpathQuery" category="input" label="Type of Data" required="true" description="Xpath Query to extract the kpi" />
-
         <property name="cacheEnabled" kind="boolean" hidden="true" default="false" description="True if tile data should be cached."/>
         <property name="userSpecificCache" kind="boolean" hidden="true" default="false" description="True if tile data should be cached per user."/>
         <property name="expirationTime" kind="integer" hidden="true" default="3" description="Expiration time for a tile cache (in seconds)."/>
