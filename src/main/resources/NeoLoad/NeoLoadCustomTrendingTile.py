@@ -9,15 +9,30 @@ def GetNeoLoadData(title, releaseid, reportXpathQuery, NeoLoadKpiName):
     result = "\"data_graph\":[ "
 
     try:
+        tasks = []
+        try:
+            # For new version API
+            try:
+                release = _releaseApi.getRelease(releaseid)
+            except Exception as e:
+                print e.getMessage()
+                release = _releaseApi.getArchivedRelease(releaseid)
 
-        TasksList = _taskApi.searchTasksByTitle(title, None, releaseid)
-        for task in TasksList:
+            for phase in release.phases:
+                for t in phase.tasks:
+                    if t.title == title:
+                        tasks.append(t)
+        except Exception as e:
+            # For old version API
+            print e.getMessage()
+            tasks = _taskApi.searchTasksByTitle(title, None, releaseid)
+
+        for task in tasks:
             if task.type.name == "CustomScriptTask":
-                # if task.type=="NeoLoad.LaunchTest" :
-                attachmens = task.attachments
-                for att in attachmens:
-                    if "report.xml" in att.exportFilename:
-                        file_byte = _releaseApi.getAttachment(att.id)
+                attachments = task.attachments
+                for attachment in attachments:
+                    if "report.xml" in attachment.exportFilename or "report.xml" in attachment.fileUri:
+                        file_byte = _releaseApi.getAttachment(attachment.id)
                         hits = NeoLoadFileUtil.getCustomStat(reportXpathQuery, file_byte)
                         result += "{\"kpi\":" + hits + "},"
 
@@ -39,15 +54,3 @@ if NeoLoadTaskTitle is not None and reportXpathQuery is not None and NeoLoadKpiN
     response = GetNeoLoadData(NeoLoadTaskTitle, releaseid, reportXpathQuery, NeoLoadKpiName)
     if response is not None:
         data = json.loads(response)
-        # url = "/api/extension/neotys/TrendingData?NeoLoadTaskTitle="+NeoLoadTaskTitle+"&releaseid="+releaseid
-
-# request = HttpRequest({"url": "http://localhost:5516"})
-# response = request.get(url, contentType='application/json')
-
-# if response.status != 200:
-#    raise Exception("Request to neoload trending api failed with status %s, response %s" % (response.status, response.response))
-
-
-# NeoLoadTaskTitle = request.query["NeoLoadTaskTitle"]
-
-##json=GetNeoLoadData(NeoLoadTaskTitle)
