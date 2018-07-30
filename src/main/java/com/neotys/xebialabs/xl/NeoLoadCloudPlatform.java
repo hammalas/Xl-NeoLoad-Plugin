@@ -65,9 +65,8 @@ public class NeoLoadCloudPlatform {
 
     public CloudResponse generateYmlCloudFile() {
         int code = 0;
-        CloudResponse res;
-        StringBuilder yml;
-        yml = new StringBuilder();
+        CloudResponse cloudResponse;
+        StringBuilder yml = new StringBuilder();
         try {
             addOutput("Generating the YML");
             yml.append("infrastructures:\n");
@@ -79,7 +78,7 @@ public class NeoLoadCloudPlatform {
             yml.append("   zones:\n");
             for (int i = 0; i < cloudLocations.size(); i++) {
                 if (cloudLocations.get(i).getCloudZoneID() == null) {
-                    addError("Location", "Location NUll", null);
+                    addError("Location", "Location NULL", null);
                 }
                 yml.append("   - id: " + cloudLocations.get(i).getCloudZoneID() + "\n");
                 yml.append("     count: " + cloudLocations.get(i).getNumberOfLG() + "\n");
@@ -94,12 +93,12 @@ public class NeoLoadCloudPlatform {
         } catch (Exception e) {
             addError("ERROR", "Technical Error", e);
         }
-        res = new CloudResponse(yml.toString(), code);
+        cloudResponse = new CloudResponse(yml.toString(), code);
 
-        res.addToError(errors);
-        res.addToOut(output);
+        cloudResponse.addToError(errors);
+        cloudResponse.addToOut(output);
 
-        return res;
+        return cloudResponse;
     }
 }
 
