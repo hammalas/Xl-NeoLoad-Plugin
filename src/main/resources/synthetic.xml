@@ -45,14 +45,14 @@
 
 
     <!-- NEOLOAD TASKS -->
-    <type type="NeoLoad.UpdateConstantVariables" extends="xlrelease.PythonScript" label="NeoLoad Update Constant Variable" description="Update Constant a NeoLoad variables">
+    <type type="NeoLoad.UpdateConstantVariables" extends="xlrelease.PythonScript" label="Update Constant Variable" description="Update Constant a NeoLoad variable">
     <property name="iconLocation" default="neoload.png" hidden="true"/>
     <property name="taskColor" hidden="true" default="##6CBF09" />
         <property name="ConstantVariableName"   required="true" label="Name of the NeoLoad Variable"  category="input"/>
         <property name="ConstantVariableValue"  required="true" label="Value of the NeoLoad Variable"  category="input"/>
         <property name="NeoLoadVariable" hidden="true" default="-1" category="output" />
     </type>
-    <type type="NeoLoad.LaunchTest" extends="xlrelease.PythonScript" label="NeoLoad Test" description="Execute a NeoLoad test">
+    <type type="NeoLoad.LaunchTest" extends="xlrelease.PythonScript" label="Launch Test" description="Execute a NeoLoad test">
         <property name="iconLocation" default="neoload.png" hidden="true"/>
         <property name="taskColor" hidden="true" default="##6CBF09" />
         <property name="NeoLoadPath"  kind="ci" required="true" label="NeoLoad" referenced-type="NeoLoad.Controller" category="input"/>
@@ -69,7 +69,7 @@
         <property name="NeoloadScenario" category="input" required="true" label="NeoLoad scenario" description="Name of the NeoLoad test to launch"/>
         <property name="NeoLoadTestDescription" category="input" required="false" label="Test Description" description="Description of the test"/>
       </type>
-    <type type="NeoLoad.LaunchNeoLoadCloudSession" extends="xlrelease.PythonScript" label="NeoLoad Cloud Session" description="Launch NeoLoad Cloud Session">
+    <type type="NeoLoad.LaunchNeoLoadCloudSession" extends="xlrelease.PythonScript" label="Generate Cloud Session" description="Generate NeoLoad Cloud Session">
         <property name="iconLocation" default="neoload.png" hidden="true"/>
         <property name="taskColor" hidden="true" default="##6CBF09" />
         <property name="NeoLoadCloudWorkGroup"  required="true"  label="Neotys Cloud WorkGroup" category="input"/>

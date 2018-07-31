@@ -769,8 +769,8 @@
 <h2><a id="user-content-preface" class="anchor" aria-hidden="true" href="#preface"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Preface</h2>
 
 <h2><a id="user-content-overview" class="anchor" aria-hidden="true" href="#overview"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Overview</h2>
-    <p>NeoLoad plugin for XL release allows the users to launch NeoLoad tests, change variables before launching others tests or generate a Neotys Cloud Session.</p>
-    <p>NeoLoad launched tests can be sent to NeoLoad Web SaaS or On-Premises.</p>
+    <p>NeoLoad plugin for XL release allows the users to launch <a href="https://www.neotys.com/neoload/overview">NeoLoad</a> tests, change variables before launching others tests or generate a <a href="https://www.neotys.com/solutions/cloud-load-testing">Neotys Cloud Session</a>.</p>
+    <p>NeoLoad launched tests can be sent to <a href="https://www.neotys.com/neoload/features/neoload-web">NeoLoad Web</a> SaaS or On-Premises.</p>
 <h2><a id="user-content-task" class="anchor" aria-hidden="true" href="#task"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Tasks</h2>
     <p>The plugin has 3 different tasks.</p>
     <h4><a id="user-content-launch-test-task" class="anchor" aria-hidden="true" href="#launch-test-task"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Launch Test Task</h4>
@@ -780,7 +780,7 @@
         <li>On a Neotys Team Server</li>
         <li>On a Source control (SVN)</li>
         </ul>
-        <p>This task is also compatible with the usage of our new platform <a href="https://www.neotys.fr/neoload/features/neoload-web">NeoLoad Web</a>.</p>
+        <p>This task is also compatible with the usage of our new platform NeoLoad Web.</p>
         <p>Note: If the user has a NeoLoad web subscription, the plugin will stream the data to the user's NeoLoad web account (SaaS or On-Premises).</p>
         <p>The task is failing when the SLA of the test are not met.</p>
         <p>The launch test task is storing on the task 3 reports : report.xml (required for the custom tile), junit.xml, report.pdf</p>
