@@ -157,8 +157,8 @@ if eu_west_4 is not None :
 
 response=session.generateYmlCloudFile()
 # set variables
-output = response.stdout
-error = response.stderr
+output = response.getStdout()
+error = response.getStderr()
 NeoLoadCloudYML = Variable('NeoLoadCloudYML', response.ymlContent)
 
 releaseid=getCurrentRelease().id

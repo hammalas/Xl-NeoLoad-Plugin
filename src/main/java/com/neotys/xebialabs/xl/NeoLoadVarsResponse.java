@@ -5,8 +5,8 @@ package com.neotys.xebialabs.xl;
  */
 class NeoLoadVarsResponse extends CloudResponse {
 
-    NeoLoadVarsResponse(String content, int code) {
-        super(content, code);
+    NeoLoadVarsResponse(String content) {
+        super(content);
     }
 
     void appendContent(String content) {

@@ -9,7 +9,7 @@ import java.util.List;
 public class NeoLoadCloudPlatform {
     private String cloudWorkGroup;
     private int duration;
-    private List<CloudBooking> cloudLocations = new ArrayList<>();;
+    private List<CloudBooking> cloudLocations = new ArrayList<>();
     private StringBuilder errors = new StringBuilder();
     private StringBuilder output = new StringBuilder();
     private String cloudType;
@@ -69,17 +69,17 @@ public class NeoLoadCloudPlatform {
             yml.append("infrastructures:\n");
             yml.append(" - name: My Cloud infrastructure\n");
             yml.append("   type: NEOTYS_CLOUD_LOAD_GENERATOR\n");
-            yml.append("   workgroup: " + this.cloudWorkGroup + "\n");
-            yml.append("   architecture: " + this.cloudType + "\n");
-            yml.append("   duration: " + this.duration + "h\n");
+            yml.append("   workgroup: ").append(this.cloudWorkGroup).append("\n");
+            yml.append("   architecture: ").append(this.cloudType).append("\n");
+            yml.append("   duration: ").append(this.duration).append("h\n");
             yml.append("   zones:\n");
-            for (int i = 0; i < cloudLocations.size(); i++) {
-                if (cloudLocations.get(i).getCloudZoneID() == null) {
-                    addError("Location", "Location NULL", null);
-                }
-                yml.append("   - id: " + cloudLocations.get(i).getCloudZoneID() + "\n");
-                yml.append("     count: " + cloudLocations.get(i).getNumberOfLG() + "\n");
-            }
+	        for (CloudBooking cloudLocation : cloudLocations) {
+		        if (cloudLocation.getCloudZoneID() == null) {
+			        addError("Location", "Location NULL", null);
+		        }
+		        yml.append("   - id: ").append(cloudLocation.getCloudZoneID()).append("\n");
+		        yml.append("     count: ").append(cloudLocation.getNumberOfLG()).append("\n");
+	        }
 
             if (yml.length() > 0) {
                 addOutput("YML generated : " + yml.toString());
@@ -90,7 +90,7 @@ public class NeoLoadCloudPlatform {
         } catch (Exception e) {
             addError("ERROR", "Technical Error", e);
         }
-        cloudResponse = new CloudResponse(yml.toString(), code);
+        cloudResponse = new CloudResponse(yml.toString());
 
         cloudResponse.addToError(errors);
         cloudResponse.addToOut(output);

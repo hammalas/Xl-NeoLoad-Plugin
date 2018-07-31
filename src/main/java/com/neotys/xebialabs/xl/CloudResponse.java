@@ -4,17 +4,28 @@ package com.neotys.xebialabs.xl;
  * Created by hrexed on 16/02/18.
  */
 public class CloudResponse {
-    public int rc;
-    public String stdout;
-    public String stderr;
-    public String ymlContent;
+    private String stdout;
+    private String stderr;
+    protected String ymlContent;
 
-    CloudResponse(String content, int code) {
+    CloudResponse(String content) {
         this.ymlContent = content;
-        this.rc = code;
     }
 
-    void addToOut(StringBuilder s) {
+
+	public String getStdout() {
+		return stdout;
+	}
+
+	public String getStderr() {
+		return stderr;
+	}
+
+	public String getYmlContent() {
+		return ymlContent;
+	}
+
+	void addToOut(StringBuilder s) {
         this.stdout += "\n" + s.toString();
     }
 

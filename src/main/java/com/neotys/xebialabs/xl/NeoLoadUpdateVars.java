@@ -26,9 +26,7 @@ public class NeoLoadUpdateVars {
 
     public NeoLoadVarsResponse UpdateVariable() {
         NeoLoadVarsResponse response;
-        int exitcode = 0;
-
-        response = new NeoLoadVarsResponse(variableName + "=" + variableValue, exitcode);
+        response = new NeoLoadVarsResponse(variableName + "=" + variableValue);
         for (String variable : variables) {
             response.appendContent(variable);
         }

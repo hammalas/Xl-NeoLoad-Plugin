@@ -54,7 +54,6 @@ import static com.xebialabs.overthere.util.CapturingOverthereExecutionOutputHand
  */
 public class NeoLoadTest {
 
-    private static final String SCRIPT_NAME = "NeoLoad-Test";
     private static final String WINDOWS_TELNET_LABEL = "Windows - Telnet";
     private static final String WINDOWS_RM_LABEL = "Windows - WinRM";
     private static final String LINUX_LABEL = "Linux";
