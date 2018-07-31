@@ -758,45 +758,112 @@
 </div>
 
     
-  <div id="readme" class="readme blob instapaper_body">
-    <article class="markdown-body entry-content" itemprop="text"><h1><a id="user-content-xlr-neotys-plugin" class="anchor" aria-hidden="true" href="#xlr-neotys-plugin"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>xlr-neotys-plugin</h1>
+<div id="readme" class="readme blob instapaper_body">
+<article class="markdown-body entry-content" itemprop="text"><h1><a id="user-content-xlr-neotys-plugin" class="anchor" aria-hidden="true" href="#xlr-neotys-plugin"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>xlr-neotys-plugin</h1>
 <p><a href="https://travis-ci.org/xebialabs-community/xlr-neotys-plugin" rel="nofollow"><img src="https://camo.githubusercontent.com/2bb7921754341f12eb900a8a73d1aa126052de08/68747470733a2f2f7472617669732d63692e6f72672f78656269616c6162732d636f6d6d756e6974792f786c722d6e656f7479732d706c7567696e2e7376673f6272616e63683d6d6173746572" alt="Build Status" data-canonical-src="https://travis-ci.org/xebialabs-community/xlr-neotys-plugin.svg?branch=master" style="max-width:100%;"></a>
 <a href="https://www.codacy.com/app/tjrandall/xlr-neotys-plugin_2?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=xebialabs-community/xlr-neotys-plugin&amp;utm_campaign=Badge_Grade" rel="nofollow"><img src="https://camo.githubusercontent.com/0cb8fc02f315e4c6311808981a9909e3142fca37/68747470733a2f2f6170692e636f646163792e636f6d2f70726f6a6563742f62616467652f47726164652f3438306538383265386537343464373438346665386330303630626264303730" alt="Codacy Badge" data-canonical-src="https://api.codacy.com/project/badge/Grade/480e882e8e744d7484fe8c0060bbd070" style="max-width:100%;"></a>
 <a href="https://codeclimate.com/github/xebialabs-community/xlr-neotys-plugin" rel="nofollow"><img src="https://camo.githubusercontent.com/a4d1f29691e2cd1f406f11965021c1058fb62ad7/68747470733a2f2f636f6465636c696d6174652e636f6d2f6769746875622f78656269616c6162732d636f6d6d756e6974792f786c722d6e656f7479732d706c7567696e2f6261646765732f6770612e737667" alt="Code Climate" data-canonical-src="https://codeclimate.com/github/xebialabs-community/xlr-neotys-plugin/badges/gpa.svg" style="max-width:100%;"></a>
 <a href="https://opensource.org/licenses/MIT" rel="nofollow"><img src="https://camo.githubusercontent.com/3ccf4c50a1576b0dd30b286717451fa56b783512/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4c6963656e73652d4d49542d79656c6c6f772e737667" alt="License: MIT" data-canonical-src="https://img.shields.io/badge/License-MIT-yellow.svg" style="max-width:100%;"> </a>
 <a href="/xebialabs-community/xlr-neotys-plugin/blob/master"><img src="https://camo.githubusercontent.com/6d321ab770df9b71c708842284663bd5bbca6252/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f646f776e6c6f6164732f78656269616c6162732d636f6d6d756e6974792f786c722d6e656f7479732d706c7567696e2f746f74616c2e737667" alt="Github All Releases" data-canonical-src="https://img.shields.io/github/downloads/xebialabs-community/xlr-neotys-plugin/total.svg" style="max-width:100%;"></a></p>
+
 <h2><a id="user-content-preface" class="anchor" aria-hidden="true" href="#preface"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Preface</h2>
+
 <h2><a id="user-content-overview" class="anchor" aria-hidden="true" href="#overview"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Overview</h2>
-<p>The plugin has 3 different tasks:</p>
-<h4><a id="user-content-launch-test-task" class="anchor" aria-hidden="true" href="#launch-test-task"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Launch test task</h4>
-<p>Launch test task allow the user to trigger a NeoLoad load test on a remote machine ( windows, macos, linux). This task supports all the different way to store a Neoload project:</p>
-<ul>
-<li>Locally</li>
-<li>On a Neotys Team Server</li>
-<li>On a Source control ( Git or svn)</li>
-</ul>
-<p>This task is also compatible with the usage of our new platform : NeoLoad Web.</p>
-<p>Note: If the user has a NeoLoad web subscription, the plugin will stream the data to the user's NeoLoad web account ( saas or on prem).</p>
-<p>The task is failing when the SLA of the test are not met.</p>
-<p>The launch test task is storing on the ask 3 reports : report.xml ( required for the custom tile), junit.xml, report.pdf</p>
-<h4><a id="user-content-update-variable-task" class="anchor" aria-hidden="true" href="#update-variable-task"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Update variable task</h4>
-<p>The update variable task allows the user to rewrite the runtime context of a test. The main idea behind this task is to update the project used by "launch test task" by updating the reference of the System under test.</p>
-<p>If the XL release user is deploying the application on a new environment, he will be able to pass the definition of the environment to NeoLoad through the update variable task.</p>
-<h4><a id="user-content-cloud-session-task" class="anchor" aria-hidden="true" href="#cloud-session-task"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Cloud session task</h4>
-<p>Neotys offer and manage a cloud platform. Our users has the ability to spin up Load generators based on 57 different geos ( Load generator is the component generating the load to the application). Our users can run test from the expected location of the endusers.</p>
-<p>The cloud session task will allow xl release users to create a cloud session that would used by the "launch test " task.</p>
-<p>Update variable and cloud session are tasks that are optional but will change the behavior of the launch test task.</p>
-<h2><a id="user-content-custom-tile-" class="anchor" aria-hidden="true" href="#custom-tile-"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Custom tile :</h2>
-<p>The plugin comes with 2 custom tiles:</p>
-<p><strong>NeoLoad trending graph</strong>: The user can add to the release dashboard a tile that will trend all the test launched ( having a specific name) on following kpis:</p>
-<ul>
-<li>Average response time</li>
-<li>Errors</li>
-<li>Hit/s</li>
-</ul>
-<p><strong>NeoLoad Custom trending graph</strong>: The user can trend any metrics exposed in our report.xml. the user will specify the xpath query required to collect the kpi from our report.</p>
+    <p>NeoLoad plugin for XL release allows the users to launch NeoLoad tests, change variables before launching others tests or generate a Neotys Cloud Session.</p>
+    <p>NeoLoad launched tests can be sent to NeoLoad Web SaaS or On-Premises.</p>
+<h2><a id="user-content-task" class="anchor" aria-hidden="true" href="#task"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Tasks</h2>
+    <p>The plugin has 3 different tasks.</p>
+    <h4><a id="user-content-launch-test-task" class="anchor" aria-hidden="true" href="#launch-test-task"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Launch Test Task</h4>
+        <p>Launch test task allow the user to trigger a NeoLoad load test on a remote machine (Windows, Linux, Mac OS). This task supports all the different ways to store a Neoload project:</p>
+        <ul>
+        <li>Locally</li>
+        <li>On a Neotys Team Server</li>
+        <li>On a Source control (SVN)</li>
+        </ul>
+        <p>This task is also compatible with the usage of our new platform <a href="https://www.neotys.fr/neoload/features/neoload-web">NeoLoad Web</a>.</p>
+        <p>Note: If the user has a NeoLoad web subscription, the plugin will stream the data to the user's NeoLoad web account (SaaS or On-Premises).</p>
+        <p>The task is failing when the SLA of the test are not met.</p>
+        <p>The launch test task is storing on the task 3 reports : report.xml (required for the custom tile), junit.xml, report.pdf</p>
+    <h4><a id="user-content-update-variable-task" class="anchor" aria-hidden="true" href="#update-variable-task"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Update Variable Task</h4>
+        <p>The update variable task allows the user to rewrite the runtime context of a test. The main idea behind this task is to update the project used by "launch test task" by updating the reference of the System under test.</p>
+        <p>If the XL release user is deploying the application on a new environment, he will be able to pass the definition of the environment to NeoLoad through the update variable task.</p>
+    <h4><a id="user-content-cloud-session-task" class="anchor" aria-hidden="true" href="#cloud-session-task"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Cloud Session Task</h4>
+        <p>Neotys offer and manage a cloud platform. The users have the ability to spin up Load Generators based on 57 different geographies (Load Generator is the component generating the load to the application). The users can run test from the expected location of the end users.</p>
+        <p>The cloud session task will allow xl release users to create a cloud session that would be used by the Launch Test Task.</p>
+        <p>Update Variable and Cloud Session are optional tasks.</p>
+
+<h2><a id="user-content-configuration" class="anchor" aria-hidden="true" href="#configuration"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Configurations</h2>
+    <p>The plugin has 5 different configurations.</p>
+    <h4><a id="user-content-configuration-controller" class="anchor" aria-hidden="true" href="#configuration-controller"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>NeoLoad Controller</h4>
+        <p>This configuration specifies where NeoLoad Controller is installed and how to access it.</p>
+        <ul>
+        <li>Supported operation systems: Linux, Windows (Telnet), Windows (WinRM), Mac OS.<br>
+            Please refer to <a href="https://docs.xebialabs.com/xl-platform/concept/remoting-plugin.html">Xebia remoting plugin</a> and <a href="https://docs.xebialabs.com/xl-deploy/4.5.x/remotingPluginManual.html">Xebia remoting plugin manual</a> in order to correcly configure the NeoLoad Controller machine.</li>
+        <li>Host name or IP address of the machine where NeoLoad Controller is installed</li>
+        <li>NeoLoad installation folder in the host</li>
+        <li>User name to accces to the host</li>
+        <li>Password to access to the host</li>
+        </ul>
+        <p>Here is an example of NeoLoad Controller configuration:</p>
+        <p align="center"><a target="_blank" href="screenshots/NeoLoadControllerConfiguration.PNG"><img src="screenshots/NeoLoadControllerConfiguration.PNG" alt="NeoLoad Controller Configuration" style="max-width:100%;"></a></p>
+    <h4><a id="user-content-configuration-nts" class="anchor" aria-hidden="true" href="#configuration-nts"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Neotys Team Server</h4>
+        <p>This configuration specifies Neotys Team Server that allows to lease a NeoLoad license and check out a collaboration NeoLoad project.</p>
+        <ul>
+        <li>Neotys Team Server URL</li>
+        <li>User name to accces to Neotys Team Server</li>
+        <li>Password to access to Neotys Team Server</li>
+        <li>License identifier that NeoLoad Controller will lease when launching a test</li>
+        </ul>
+        <p>Here is an example of Neotys Team Server configuration:</p>
+        <p align="center"><a target="_blank" href="screenshots/NeotysTeamServerConfiguration.PNG"><img src="screenshots/NeotysTeamServerConfiguration.PNG" alt="Neotys Team Server Configuration" style="max-width:100%;"></a></p>
+    <h4><a id="user-content-configuration-web" class="anchor" aria-hidden="true" href="#configuration-web"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>NeoLoad Web</h4>
+        <p>This configuration specifies NeoLoad Web that allows to stream the launched test to NeoLoad Web SaaS or On-Premises.</p>
+        <ul>
+        <li>NeoLoad Web API URL</li>
+        </ul>
+        <p>Here is an example of NeoLoad Web configuration:</p>
+        <p align="center"><a target="_blank" href="screenshots/NeoLoadWebConfiguration.PNG"><img src="screenshots/NeoLoadWebConfiguration.PNG" alt="NeoLoad Web Configuration" style="max-width:100%;"></a></p>
+    <h4><a id="user-content-configuration-collaboration" class="anchor" aria-hidden="true" href="#configuration-collaboration"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>NeoLoad Collaboration</h4>
+        <p>This configuration specifies the SVN third-party collaboration that is used to check out a NeoLoad project.</p>
+        <ul>
+        <li>SVN Server URL</li>
+        <li>User name to accces to SVN Server</li>
+        <li>Password to access to SVN Server</li>
+        </ul>
+    <h4><a id="user-content-configuration-cloud" class="anchor" aria-hidden="true" href="#configuration-cloud"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>NeoLoad Cloud</h4>
+        <p>This configuration specifies the credentials to access to Neotys Cloud Platform. This configuration is used for Cloud Session Task.
+        <ul>
+        <li>User name to accces to Neotys Cloud Platform</li>
+        <li>Password to access to Neotys Cloud Platform</li>
+        </ul>
+
+<h2><a id="user-content-release" class="anchor" aria-hidden="true" href="#release"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>NeoLoad Release</h2>
+    <p>Here is an example of NeoLoad Release:</p>
+    <p align="center"><a target="_blank" href="screenshots/NeoLoadRelease.PNG"><img src="screenshots/NeoLoadRelease.PNG" alt="NeoLoad Release" style="max-width:100%;"></a></p>
+    
+<h2><a id="user-content-custom-tile" class="anchor" aria-hidden="true" href="#custom-tile"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Custom Tiles</h2>
+    <p>The plugin comes with 2 custom tiles.</p>
+    <h4><a id="user-content-tile" class="anchor" aria-hidden="true" href="#tile"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>NeoLoad Trending Graph</h4>
+    <p>The user can add to the release dashboard a tile that will trend all the launched tests (having a specific name) on following KPIs:</p>
+        <ul>
+        <li>Average response time</li>
+        <li>Errors</li>
+        <li>Hit/s</li>
+        </ul>
+     <p>Here is an example of NeoLoad Trending Graph:</p>
+     <p align="center"><a target="_blank" href="screenshots/TrendingGraph.PNG"><img src="screenshots/TrendingGraph.PNG" alt="NeoLoad Trending Graph" style="max-width:100%;"></a></p>
+    <h4><a id="user-content-tile-custom" class="anchor" aria-hidden="true" href="#tile-custom"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>NeoLoad Custom Trending Graph</h4>
+    <p>The user can trend any metrics exposed in NeoLoad report.xml.
+    <p>The user will specify the XPath query required to collect the KPI from NeoLoad report.xml.</p>
+
 <h2><a id="user-content-installation" class="anchor" aria-hidden="true" href="#installation"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Installation</h2>
+Pleas refer to <a href="https://docs.xebialabs.com/xl-release/how-to/install-or-remove-xl-release-plugins.html">How to install a XL Release plugin</a>
 <h2><a id="user-content-references" class="anchor" aria-hidden="true" href="#references"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>References</h2>
+<ul>
+<li><a href="https://www.neotys.com/neoload/overview">NeoLoad</a></li>
+<li><a href="https://neoload.saas.neotys.com/">NeoLoad Web</a></li>
+<li><a href="https://www.neotys.com/solutions/cloud-load-testing">Neotys Cloud Platform</a></li>
+</ul>
 </article>
   </div>
 

@@ -11,7 +11,7 @@
 
     <!-- NEOLOAD CONFIGURATIONS -->
     <type type="NeoLoad.Controller" label="NeoLoad Controller" extends="xlrelease.Configuration">
-        <property name="NL_Host" default="/opt/NeoLoad/bin/NeoLoadCmd" required="true" label="NeoLoad Host" description="Host where NeoLoad is installed" category="input" />
+        <property name="NL_Host" default="hostname" required="true" label="NeoLoad Host" description="Host where NeoLoad is installed" category="input" />
         <property name="NL_Controller_Path" default="/opt/NeoLoad/" required="true" label="NeoLoad Installation path" description="Path to the NeoLoad installation" category="input" />
         <property name="username" description="The username to connect to the NeoLoad Controller" category="input" label="Login" />
         <property name="password" description="The password to connect to the NeoLoad Controller" category="input" password="true" label="password"/>
