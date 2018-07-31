@@ -92,7 +92,6 @@
                 </executions>
             </plugin>
         </plugins>
-
     </build>
     <repositories>
         <repository>
@@ -104,4 +103,14 @@
             <url>http://nexus/index.html#nexus-search;quick~password-scrambler-portable</url>
         </repository>
     </repositories>
+    <distributionManagement>
+        <repository>
+            <id>neotys-public-releases</id>
+            <url>http://maven.neotys.com/content/repositories/releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>neotys-public-snapshots</id>
+            <url>http://maven.neotys.com/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
 </project>
