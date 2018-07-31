@@ -67,18 +67,18 @@ public class NeoLoadCloudPlatform {
         try {
             addOutput("Generating the YML");
             yml.append("infrastructures:\n");
-            yml.append(" - name: My Cloud infrastructure\n");
-            yml.append("   type: NEOTYS_CLOUD_LOAD_GENERATOR\n");
-            yml.append("   workgroup: " + this.cloudWorkGroup + "\n");
-            yml.append("   architecture: " + this.cloudType + "\n");
-            yml.append("   duration: " + this.duration + "h\n");
-            yml.append("   zones:\n");
+            yml.append("  - name: My Cloud infrastructure\n");
+            yml.append("    type: NEOTYS_CLOUD_LOAD_GENERATOR\n");
+            yml.append("    workgroup: " + this.cloudWorkGroup + "\n");
+            yml.append("    architecture: " + this.cloudType + "\n");
+            yml.append("    duration: " + this.duration + "h\n");
+            yml.append("    zones:\n");
             for (int i = 0; i < cloudLocations.size(); i++) {
                 if (cloudLocations.get(i).getCloudZoneID() == null) {
                     addError("Location", "Location NULL", null);
                 }
-                yml.append("   - id: " + cloudLocations.get(i).getCloudZoneID() + "\n");
-                yml.append("     count: " + cloudLocations.get(i).getNumberOfLG() + "\n");
+                yml.append("    - id: " + cloudLocations.get(i).getCloudZoneID() + "\n");
+                yml.append("      count: " + cloudLocations.get(i).getNumberOfLG() + "\n");
             }
 
             if (yml.length() > 0) {
