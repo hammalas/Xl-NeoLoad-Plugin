@@ -67,18 +67,18 @@ public class NeoLoadCloudPlatform {
         try {
             addOutput("Generating the YML");
             yml.append("infrastructures:\n");
-            yml.append(" - name: My Cloud infrastructure\n");
-            yml.append("   type: NEOTYS_CLOUD_LOAD_GENERATOR\n");
-            yml.append("   workgroup: ").append(this.cloudWorkGroup).append("\n");
-            yml.append("   architecture: ").append(this.cloudType).append("\n");
-            yml.append("   duration: ").append(this.duration).append("h\n");
-            yml.append("   zones:\n");
+            yml.append("  - name: My Cloud infrastructure\n");
+            yml.append("    type: NEOTYS_CLOUD_LOAD_GENERATOR\n");
+            yml.append("    workgroup: ").append(this.cloudWorkGroup).append("\n");
+            yml.append("    architecture: ").append(this.cloudType).append("\n");
+            yml.append("    duration: ").append(this.duration).append("h\n");
+            yml.append("    zones:\n");
 	        for (CloudBooking cloudLocation : cloudLocations) {
 		        if (cloudLocation.getCloudZoneID() == null) {
 			        addError("Location", "Location NULL", null);
 		        }
-		        yml.append("   - id: ").append(cloudLocation.getCloudZoneID()).append("\n");
-		        yml.append("     count: ").append(cloudLocation.getNumberOfLG()).append("\n");
+		        yml.append("    - id: ").append(cloudLocation.getCloudZoneID()).append("\n");
+		        yml.append("      count: ").append(cloudLocation.getNumberOfLG()).append("\n");
 	        }
 
             if (yml.length() > 0) {
