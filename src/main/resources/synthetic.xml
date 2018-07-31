@@ -33,7 +33,7 @@
         <property name="password" label="Neotys Team Server Password" description="Neotys Team Server password" password="true" category="Configuration"/>
         <property name="licenceID" label="License Identifier" description="License identifier of your shared license" category="Configuration"/>
     </type>
-    <type type="NeoLoad.Cloud" extends="xlrelease.Configuration">
+    <type type="NeoLoad.Cloud" label="NeoLoad Cloud" extends="xlrelease.Configuration">
         <property name="username" label="User name" description="Neotys CloudPlatform username" category="input"/>
         <property name="password" label="Password" description="Neotys CloudPlatform password" category="input" password="true"/>
     </type>

@@ -1,5 +1,3 @@
-from com.xebialabs.xlrelease.domain import Task
-from com.xebialabs.deployit.plugin.api.reflect import Type
 from com.neotys.xebialabs.xl import NeoLoadFileUtil
 from java.lang import Exception
 

@@ -1,4 +1,3 @@
-import sys
 from com.neotys.xebialabs.xl import NeoLoadFileUtil
 
 def GetNeoLoadData(title,releaseid):

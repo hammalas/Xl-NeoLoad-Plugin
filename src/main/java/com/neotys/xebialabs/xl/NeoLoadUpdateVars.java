@@ -10,12 +10,11 @@ import java.util.List;
 public class NeoLoadUpdateVars {
     private String variableName;
     private String variableValue;
-    private List<String> variables;
+    private List<String> variables = new ArrayList<>();
 
     public NeoLoadUpdateVars(String variableName, String variableValue) {
         this.variableName = variableName;
         this.variableValue = variableValue;
-        variables = new ArrayList<>();
     }
 
     public void SetExistingVars(String var) {

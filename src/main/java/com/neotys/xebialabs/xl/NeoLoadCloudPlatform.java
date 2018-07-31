@@ -9,25 +9,22 @@ import java.util.List;
 public class NeoLoadCloudPlatform {
     private String cloudWorkGroup;
     private int duration;
-    private List<CloudBooking> cloudLocations;
-    private StringBuilder errors;
-    private StringBuilder output;
+    private List<CloudBooking> cloudLocations = new ArrayList<>();;
+    private StringBuilder errors = new StringBuilder();
+    private StringBuilder output = new StringBuilder();
     private String cloudType;
     private static final String MEDIUM = "MEDIUM";
     private static final String LARGE = "LARGE";
 
-    public NeoLoadCloudPlatform(String cloudWorgroup, String duration, String cloudType) {
-        cloudLocations = new ArrayList<>();
-        errors = new StringBuilder();
-        output = new StringBuilder();
-        try {
+    public NeoLoadCloudPlatform(String cloudWorkGroup, String duration, String cloudType) {
+
             if (isCorrectType(cloudType)) {
                 this.cloudType = cloudType.toUpperCase();
             } else {
                 this.cloudType = MEDIUM;
             }
-
-            this.cloudWorkGroup = cloudWorgroup;
+            this.cloudWorkGroup = cloudWorkGroup;
+	    try {
             this.duration = Integer.parseInt(duration);
 
         } catch (NumberFormatException e) {
@@ -40,7 +37,7 @@ public class NeoLoadCloudPlatform {
     }
 
     private boolean isCorrectType(String type) {
-        return type.equalsIgnoreCase(MEDIUM) || type.equalsIgnoreCase(LARGE);
+        return MEDIUM.equalsIgnoreCase(type) || LARGE.equalsIgnoreCase(type);
     }
 
     private void addError(String type, String message, Exception e) {

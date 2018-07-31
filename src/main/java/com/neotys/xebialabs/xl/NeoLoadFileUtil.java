@@ -29,13 +29,13 @@ public class NeoLoadFileUtil {
             DocumentBuilder builder = factory.newDocumentBuilder();
             Document doc = builder.parse(input);
 
-            return GetCustomData(doc, xpath);
+            return getCustomData(doc, xpath);
         } catch (Exception e) {
             return e.getMessage();
         }
     }
 
-    public static String GetStat(String type, byte[] bytes) throws IOException, SAXException, ParserConfigurationException, XPathExpressionException {
+    public static String getStat(String type, byte[] bytes) throws IOException, SAXException, ParserConfigurationException, XPathExpressionException {
         InputStream input = new ByteArrayInputStream(bytes);
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
@@ -43,16 +43,16 @@ public class NeoLoadFileUtil {
 
         switch (type) {
             case HITS:
-                return GetData(doc, "avg_hits/s");
+                return getData(doc, "avg_hits/s");
             case ERRORS:
-                return GetData(doc, "total_errors");
+                return getData(doc, "total_errors");
             case RESPONSE:
-                return GetData(doc, "avg_reqresponsetime");
+                return getData(doc, "avg_reqresponsetime");
         }
         return null;
     }
 
-    private static String GetData(Document doc, String key) throws XPathExpressionException {
+    private static String getData(Document doc, String key) throws XPathExpressionException {
         XPath xPath = XPathFactory.newInstance().newXPath();
         String result = null;
         NodeList nodes = (NodeList) xPath.evaluate("/report/summary/statistics/statistic[@name='" + key + "']", doc.getDocumentElement(), XPathConstants.NODESET);
@@ -63,7 +63,7 @@ public class NeoLoadFileUtil {
         return result;
     }
 
-    private static String GetCustomData(Document doc, String Xpath) throws XPathExpressionException {
+    private static String getCustomData(Document doc, String Xpath) throws XPathExpressionException {
         XPath xPath = XPathFactory.newInstance().newXPath();
         XPathExpression xPathExpression = xPath.compile(Xpath);
         return (String) xPathExpression.evaluate(doc, XPathConstants.STRING);

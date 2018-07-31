@@ -1,6 +1,4 @@
-import sys, json
-from com.xebialabs.xlrelease.domain import Task
-from com.xebialabs.deployit.plugin.api.reflect import Type
+import json
 from com.neotys.xebialabs.xl import NeoLoadFileUtil
 from java.lang import Exception
 
@@ -36,13 +34,13 @@ def GetNeoLoadData(title, releaseid, trendingtype):
                     if "report.xml" in attachment.exportFilename or "report.xml" in attachment.fileUri:
                         file_byte = _releaseApi.getAttachment(attachment.id)
                         if trendingtype == "Hit/s":
-                            hits = NeoLoadFileUtil.GetStat("hits", file_byte)
+                            hits = NeoLoadFileUtil.getStat("hits", file_byte)
                             result += "{\"kpi\":" + hits + "},"
                         if trendingtype == "Response Time":
-                            error = NeoLoadFileUtil.GetStat("response", file_byte)
+                            error = NeoLoadFileUtil.getStat("response", file_byte)
                             result += "{\"kpi\":" + error + "},"
                         if trendingtype == "Errors":
-                            response = NeoLoadFileUtil.GetStat("error", file_byte)
+                            response = NeoLoadFileUtil.getStat("error", file_byte)
                             result += "{\"kpi\":" + response + "},"
 
         if result[-1:] == ",":
