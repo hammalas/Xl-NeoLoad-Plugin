@@ -49,7 +49,7 @@ if CreateVar:
 response = session.execute()
 
 # set variables
-output = response.get
+output = response.stdout
 error = response.stderr
 
 reportxmlbyte = response.reportXMLBytes

@@ -61,7 +61,6 @@ public class NeoLoadCloudPlatform {
     }
 
     public CloudResponse generateYmlCloudFile() {
-        int code = 0;
         CloudResponse cloudResponse;
         StringBuilder yml = new StringBuilder();
         try {
@@ -83,15 +82,11 @@ public class NeoLoadCloudPlatform {
 
             if (yml.length() > 0) {
                 addOutput("YML generated : " + yml.toString());
-                code = 0;
             }
-            if (errors.length() > 0)
-                code = 1;
         } catch (Exception e) {
             addError("ERROR", "Technical Error", e);
         }
         cloudResponse = new CloudResponse(yml.toString());
-
         cloudResponse.addToError(errors);
         cloudResponse.addToOut(output);
 
